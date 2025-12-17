@@ -40,16 +40,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         async loadAttractionData(attractionId) {
             try {
-                // 在部署的網站上，attractions.json 檔案位於根目錄
-                const response = await fetch('attractions.json');
+                // Use an absolute path from the site root for reliability on GitHub Pages
+                const response = await fetch('/toku-web/attractions.json');
                 if (!response.ok) {
-                    throw new Error("無法載入景點資料。");
+                    throw new Error("Could not load attraction database.");
                 }
                 this.attractions = await response.json();
                 this.currentAttraction = this.attractions.find(a => a.id === attractionId);
 
                 if (!this.currentAttraction) {
-                    throw new Error("找不到景點。");
+                    throw new Error("Attraction not found.");
                 }
 
             } catch (error) {
