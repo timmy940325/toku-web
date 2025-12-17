@@ -17,6 +17,7 @@
     
         <!-- Scripts -->
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+        <script src="js/i18n.js"></script>
         <script src="js/script.js" defer></script>
     </head>
     <body>
@@ -25,31 +26,39 @@
             <nav class="main-nav">
                 <a href="index.html" class="logo">Tuku GO</a>
                 <ul>
-                    <li><a href="#story">The Story</a></li>
-                    <li><a href="#map-container">Tour Map</a></li>
-                    <li><a href="#attractions">Attractions</a></li>
-                    <li><a href="pages/about.html">About Us</a></li>
-                </ul>
-                <button class="hamburger-menu">
-                    <span></span>
+                    <li><a href="#story" data-i18n="nav_story">The Story</a></li>
+                    <li><a href="#map-container" data-i18n="nav_map">Tour Map</a></li>
+                    <li><a href="#attractions" data-i18n="nav_attractions">Attractions</a></li>
+                                    <li><a href="pages/about.html" data-i18n="nav_about">About Us</a></li>
+                                    <li class="language-selector">
+                                        <button class="lang-button">Language</button>
+                                        <ul class="lang-dropdown">
+                                            <li><a href="#" data-lang="zh-TW">繁體中文</a></li>
+                                            <li><a href="#" data-lang="en">English</a></li>
+                                            <li><a href="#" data-lang="ja">日本語</a></li>
+                                            <li><a href="#" data-lang="ko">한국어</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <button class="hamburger-menu">                    <span></span>
                     <span></span>
                     <span></span>
                 </button>
             </nav>
             <div class="mobile-nav">
-                <a href="#story">The Story</a>
-                <a href="#map-container">Tour Map</a>
-                <a href="#attractions">Attractions</a>
-                <a href="pages/about.html">About Us</a>
+                <a href="#story" data-i18n="nav_story">The Story</a>
+                <a href="#map-container" data-i18n="nav_map">Tour Map</a>
+                <a href="#attractions" data-i18n="nav_attractions">Attractions</a>
+                <a href="pages/about.html" data-i18n="nav_about">About Us</a>
             </div>
         </header>
     
         <main>
             <section class="hero">
                 <div class="hero-content">
-                    <h1 class="hero-title">Tuku GO 土庫漫遊</h1>
-                    <p class="hero-subtitle">Discover the Hidden Charms and Stories of Tuku, Yunlin</p>
-                    <a href="#story" class="cta-button">Begin the Journey</a>
+                    <h1 class="hero-title" data-i18n="hero_title">Tuku GO 土庫漫遊</h1>
+                    <p class="hero-subtitle" data-i18n="hero_subtitle">Discover the Hidden Charms and Stories of Tuku, Yunlin</p>
+                    <a href="#story" class="cta-button" data-i18n="hero_button">Begin the Journey</a>
                 </div>
                 <div class="hero-scroll-down">
                     <a href="#story"><span></span></a>
@@ -58,18 +67,18 @@
     
             <section id="story" class="story-section">
                 <div class="story-content">
-                    <h2 class="section-title">The Story of Tuku</h2>
-                    <p>Tuku is more than just a place on a map. It's a town woven from threads of history, culture, and the unforgettable aroma of sesame oil. From bustling markets to serene temples, every corner holds a story. Tuku GO is your personal guide to unlocking these treasures. We invite you to wander, to taste, and to discover the living history of this remarkable town.</p>
+                    <h2 class="section-title" data-i18n="story_title">The Story of Tuku</h2>
+                    <p data-i18n="story_content">Tuku is more than just a place on a map. It's a town woven from threads of history, culture, and the unforgettable aroma of sesame oil. From bustling markets to serene temples, every corner holds a story. Tuku GO is your personal guide to unlocking these treasures. We invite you to wander, to taste, and to discover the living history of this remarkable town.</p>
                 </div>
             </section>
     
             <section id="map-container" class="map-section">
-                <h2 class="section-title">Interactive Tour Map</h2>
+                <h2 class="section-title" data-i18n="map_title">Interactive Tour Map</h2>
                 <div id="map"></div>
             </section>
     
             <section id="attractions" class="attraction-section">
-                <h2 class="section-title">Featured Attractions</h2>
+                <h2 class="section-title" data-i18n="attractions_title">Featured Attractions</h2>
                 <div id="attraction-grid" class="attraction-grid">
                     <!-- Attraction cards will be dynamically injected here by script.js -->
                 </div>
@@ -77,7 +86,7 @@
         </main>
     
         <footer class="main-footer">
-            <p>&copy; 2025 Tuku GO. All Rights Reserved. A professional website designed for Tuku.</p>
+            <p data-i18n="footer_text">&copy; 2025 Tuku GO. All Rights Reserved. A professional website designed for Tuku.</p>
         </footer>
     
     </body>

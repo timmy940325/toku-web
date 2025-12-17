@@ -21,16 +21,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         async init() {
             try {
+                await window.I18n.init();
+                window.I18n.translatePage();
+
                 const urlParams = new URLSearchParams(window.location.search);
                 const attractionId = urlParams.get('id');
 
                 if (!attractionId) {
-                    this.renderError("Attraction ID is missing.");
+                    this.renderError(window.I18n.t('error_missing_id'));
                     return;
                 }
 
                 await this.loadAttractionData(attractionId);
                 this.renderPage();
+
+                document.addEventListener('language-changed', () => this.renderPage());
 
             } catch (error) {
                 console.error("Initialization failed:", error);
@@ -40,16 +45,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
         async loadAttractionData(attractionId) {
             try {
-                // Use an absolute path from the site root for reliability on GitHub Pages
                 const response = await fetch('/toku-web/attractions.json');
                 if (!response.ok) {
-                    throw new Error("Could not load attraction database.");
+                    throw new Error(window.I18n.t('error_db_load'));
                 }
                 this.attractions = await response.json();
                 this.currentAttraction = this.attractions.find(a => a.id === attractionId);
 
                 if (!this.currentAttraction) {
-                    throw new Error("Attraction not found.");
+                    throw new Error(window.I18n.t('error_not_found'));
                 }
 
             } catch (error) {
@@ -58,30 +62,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         renderPage() {
+            window.I18n.translatePage();
+            const lang = window.I18n.currentLang;
             const attraction = this.currentAttraction;
 
-            // Set page title
-            document.title = `Tuku GO - ${attraction.name}`;
-
-            // Set hero content
+            document.title = `Tuku GO - ${attraction.name[lang]}`;
+            
             const hero = document.getElementById('detail-hero');
             const heroTitle = document.getElementById('hero-title');
             if (hero && heroTitle) {
-                const heroImageUrl = `../images/${attraction.folder}/${attraction.card_image}`; // Use card_image for hero for now
+                const heroImageUrl = `../images/${attraction.folder}/${attraction.card_image}`;
                 hero.style.backgroundImage = `url('${heroImageUrl}')`;
-                heroTitle.textContent = attraction.name;
+                heroTitle.textContent = attraction.name[lang];
             }
 
-            // Set main content
-            document.getElementById('detail-title').textContent = attraction.name;
-            document.getElementById('detail-description').textContent = attraction.description;
+            document.getElementById('detail-title').textContent = attraction.name[lang];
+            document.getElementById('detail-description').textContent = attraction.description[lang];
 
-            // Set meta info
             const metaContainer = document.getElementById('detail-meta');
             if (metaContainer) {
                 metaContainer.innerHTML = `
-                    <p><strong>Address:</strong> ${attraction.address}</p>
-                    <p><strong>Hours:</strong> ${attraction.opening_hours}</p>
+                    <p><strong>${window.I18n.t('detail_meta_address')}:</strong> ${attraction.address[lang]}</p>
+                    <p><strong>${window.I18n.t('detail_meta_hours')}:</strong> ${attraction.opening_hours[lang]}</p>
                 `;
             }
 
@@ -97,13 +99,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (galleryContainer && imageGallery && attraction.gallery_images && attraction.gallery_images.length > 0) {
                 galleryContainer.style.display = 'block';
-                imageGallery.innerHTML = ''; // Clear existing images
+                imageGallery.innerHTML = '';
                 const fragment = document.createDocumentFragment();
 
                 attraction.gallery_images.forEach(imageName => {
                     const img = document.createElement('img');
                     img.src = `../images/${attraction.folder}/${imageName}`;
-                    img.alt = `${attraction.name} gallery image`;
+                    img.alt = `${attraction.name[window.I18n.currentLang]} gallery image`;
                     img.loading = 'lazy';
                     fragment.appendChild(img);
                 });
@@ -133,21 +135,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         getDistance(coords1, coords2) {
-            const R = 6371; // Radius of the Earth in km
+            const R = 6371; // km
             const dLat = (coords2.lat - coords1.lat) * Math.PI / 180;
             const dLon = (coords2.lon - coords1.lon) * Math.PI / 180;
-            const a =
-                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(coords1.lat * Math.PI / 180) * Math.cos(coords2.lat * Math.PI / 180) *
-                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                      Math.cos(coords1.lat * Math.PI / 180) * Math.cos(coords2.lat * Math.PI / 180) *
+                      Math.sin(dLon / 2) * Math.sin(dLon / 2);
             const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            return R * c; // Distance in km
+            return R * c;
         }
 
         renderNearbyAttractions() {
             const nearbySection = document.getElementById('nearby-section');
             const nearbyGrid = document.getElementById('nearby-grid');
             if (!nearbySection || !nearbyGrid) return;
+            
+            const lang = window.I18n.currentLang;
 
             const sorted = this.attractions
                 .filter(a => a.id !== this.currentAttraction.id && a.coordinates && !a.coordinates.placeholder)
@@ -169,14 +172,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     const imageUrl = `../images/${attraction.folder}/${attraction.card_image}`;
                     const card = document.createElement('a');
                     card.href = detailUrl;
-                    card.className = 'card'; // Simplified card for nearby section
+                    card.className = 'card';
                     card.innerHTML = `
                         <div class="card-image-container">
-                            <img src="${imageUrl}" alt="${attraction.name}" loading="lazy">
+                            <img src="${imageUrl}" alt="${attraction.name[lang]}" loading="lazy">
                         </div>
                         <div class="card-content">
-                            <h3 class="card-title">${attraction.name}</h3>
-                            <span class="card-button">Explore (${attraction.distance.toFixed(2)} km away)</span>
+                            <h3 class="card-title">${attraction.name[lang]}</h3>
+                            <span class="card-button">${window.I18n.t('detail_nearby_button', {distance: attraction.distance.toFixed(2)})}</span>
                         </div>
                     `;
                     fragment.appendChild(card);
@@ -192,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="page-container" style="text-align: center; padding-top: 5rem; padding-bottom: 5rem;">
                         <h1 class="section-title">Error</h1>
                         <p>${message}</p>
-                        <a href="../index.html" class="cta-button">Back to Homepage</a>
+                        <a href="../index.html" class="cta-button" data-i18n="error_back_button">${window.I18n.t('error_back_button')}</a>
                     </div>
                 `;
             }
