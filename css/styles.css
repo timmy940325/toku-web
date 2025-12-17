@@ -809,7 +809,6 @@ body {
 
 
 
-    display: block; /* Keep it in the layout */
 
 
 
@@ -817,7 +816,48 @@ body {
 
 
 
-    visibility: hidden; /* Hide it visually and from interactions */
+
+    display: flex; /* Changed to flex for vertical stacking */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    flex-direction: column; /* Ensure vertical stacking */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    visibility: hidden;
+
+
+
+
+
+
+
+
 
 
 
@@ -833,7 +873,23 @@ body {
 
 
 
+
+
+
+
+
+
+
+
     position: absolute;
+
+
+
+
+
+
+
+
 
 
 
@@ -849,7 +905,23 @@ body {
 
 
 
+
+
+
+
+
+
+
+
     right: 0;
+
+
+
+
+
+
+
+
 
 
 
@@ -865,7 +937,23 @@ body {
 
 
 
+
+
+
+
+
+
+
+
     border-radius: var(--border-radius);
+
+
+
+
+
+
+
+
 
 
 
@@ -881,7 +969,23 @@ body {
 
 
 
+
+
+
+
+
+
+
+
     list-style: none;
+
+
+
+
+
+
+
+
 
 
 
@@ -897,7 +1001,23 @@ body {
 
 
 
+
+
+
+
+
+
+
+
     margin-top: var(--spacing-s);
+
+
+
+
+
+
+
+
 
 
 
@@ -913,6 +1033,14 @@ body {
 
 
 
+
+
+
+
+
+
+
+
     z-index: 1100;
 
 
@@ -921,7 +1049,23 @@ body {
 
 
 
-    transform: translateY(10px); /* Start slightly lower */
+
+
+
+
+
+
+
+
+    transform: translateY(10px);
+
+
+
+
+
+
+
+
 
 
 
@@ -937,7 +1081,31 @@ body {
 
 
 
+
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -961,7 +1129,23 @@ body {
 
 
 
-    visibility: visible; /* Make it visible */
+
+
+
+
+
+
+
+
+    visibility: visible;
+
+
+
+
+
+
+
+
 
 
 
@@ -977,7 +1161,23 @@ body {
 
 
 
-    transform: translateY(0); /* Move to final position */
+
+
+
+
+
+
+
+
+    transform: translateY(0);
+
+
+
+
+
+
+
+
 
 
 
@@ -986,6 +1186,230 @@ body {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Initial Content Hiding for Smooth i18n Load --- */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    visibility: hidden;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    opacity: 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    transition: visibility 0s 0.3s, opacity 0.3s ease-in; /* Delay visibility transition */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+body.i18n-loaded {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    visibility: visible;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    opacity: 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    transition: visibility 0s, opacity 0.3s ease-in; /* No delay on loaded */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

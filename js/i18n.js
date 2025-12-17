@@ -19,6 +19,14 @@ const I18n = {
         this.currentLang = this.getLanguage();
         await this.loadTranslations(this.currentLang);
         this.initLangSelector();
+
+        // Perform initial page update after i18n is ready
+        if (typeof window.updatePageLanguage === 'function') {
+            window.updatePageLanguage();
+        }
+
+        // After initial load and translation, make content visible
+        document.body.classList.add('i18n-loaded');
     },
 
     getLanguage() {
