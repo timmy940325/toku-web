@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         async loadAttractions() {
             try {
-                // Since script.js is in js/, we go up one level to the src/ root
-                const response = await fetch('../attractions.json');
+                // 在部署的網站上，attractions.json 檔案位於根目錄
+                const response = await fetch('attractions.json');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -45,28 +45,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error("Failed to load attraction data:", error);
                 const grid = document.getElementById('attraction-grid');
                 if (grid) {
-                    grid.innerHTML = '<p class="error-message">Could not load attraction data. A local web server is required to view this site. Please see the README for instructions.</p>';
+                    grid.innerHTML = '<p class="error-message">無法載入景點資料。需要本地網頁伺服器才能查看此網站。請參閱 README 以獲取說明。</p>';
                 }
             }
         }
 
         initMap() {
             if (typeof L === 'undefined') {
-                console.error("Leaflet library not loaded.");
+                console.error("Leaflet 函式庫未載入。");
                 return;
             }
-            // Center the map on Tuku. Using the temple's coordinates as a central point.
+            // 將地圖中心設置在土庫。以順天宮的座標作為中心點。
             const mapCenter = [23.6766, 120.3906];
             const map = L.map('map').setView(mapCenter, 15);
 
-            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            // 更改為更美觀的 CartoDB Voyager 圖層
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: 'abcd',
+                maxZoom: 19
             }).addTo(map);
 
             this.attractions.forEach(attraction => {
                 if (attraction.coordinates && attraction.coordinates.lat) {
                     const marker = L.marker([attraction.coordinates.lat, attraction.coordinates.lon]).addTo(map);
-                    marker.bindPopup(`<b>${attraction.name}</b><br><a href="pages/detail.html?id=${attraction.id}">Learn more</a>`);
+                    marker.bindPopup(`<b>${attraction.name}</b><br><a href="pages/detail.html?id=${attraction.id}">了解更多</a>`);
                 }
             });
         }

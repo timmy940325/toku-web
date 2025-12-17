@@ -40,15 +40,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         async loadAttractionData(attractionId) {
             try {
-                const response = await fetch('../attractions.json');
+                // 在部署的網站上，attractions.json 檔案位於根目錄
+                const response = await fetch('attractions.json');
                 if (!response.ok) {
-                    throw new Error("Could not load attraction database.");
+                    throw new Error("無法載入景點資料。");
                 }
                 this.attractions = await response.json();
                 this.currentAttraction = this.attractions.find(a => a.id === attractionId);
 
                 if (!this.currentAttraction) {
-                    throw new Error("Attraction not found.");
+                    throw new Error("找不到景點。");
                 }
 
             } catch (error) {
