@@ -16,13 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
         constructor() {
             this.attractions = [];
             this.currentAttraction = null;
+            // Define the global update function and bind it to the class instance
+            window.updatePageLanguage = this.renderPage.bind(this);
             this.init();
         }
 
         async init() {
             try {
                 await window.I18n.init();
-                window.I18n.translatePage();
 
                 const urlParams = new URLSearchParams(window.location.search);
                 const attractionId = urlParams.get('id');
@@ -33,9 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 await this.loadAttractionData(attractionId);
+                
+                // Perform initial render
                 this.renderPage();
-
-                document.addEventListener('language-changed', () => this.renderPage());
 
             } catch (error) {
                 console.error("Initialization failed:", error);
@@ -62,6 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         renderPage() {
+            // This function is now the central point for all rendering on this page
+            if (!this.currentAttraction) return; // Don't render if data isn't loaded yet
+
             window.I18n.translatePage();
             const lang = window.I18n.currentLang;
             const attraction = this.currentAttraction;
@@ -117,13 +121,19 @@ document.addEventListener('DOMContentLoaded', () => {
         renderPanorama() {
             const attraction = this.currentAttraction;
             const panoramaContainer = document.getElementById('panorama-container');
+            if (!panoramaContainer) return;
+
+            // Clear previous instance if it exists
+            if (panoramaContainer. pannellum) {
+                 panoramaContainer.pannellum.destroy();
+            }
 
             if (typeof pannellum === 'undefined') {
                 console.error("Pannellum library not loaded.");
                 return;
             }
 
-            if (panoramaContainer && attraction.panorama_image) {
+            if (attraction.panorama_image) {
                 panoramaContainer.style.display = 'block';
                 pannellum.viewer('panorama', {
                     "type": "equirectangular",
@@ -131,6 +141,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     "autoLoad": true,
                     "autoRotate": -2
                 });
+            } else {
+                 panoramaContainer.style.display = 'none';
             }
         }
 

@@ -809,7 +809,23 @@ body {
 
 
 
-    display: none; /* Hidden by default */
+    display: block; /* Keep it in the layout */
+
+
+
+
+
+
+
+    visibility: hidden; /* Hide it visually and from interactions */
+
+
+
+
+
+
+
+    opacity: 0;
 
 
 
@@ -905,6 +921,22 @@ body {
 
 
 
+    transform: translateY(10px); /* Start slightly lower */
+
+
+
+
+
+
+
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+
+
+
+
+
+
+
 }
 
 
@@ -929,7 +961,23 @@ body {
 
 
 
-    display: block; /* Show when 'is-open' class is present */
+    visibility: visible; /* Make it visible */
+
+
+
+
+
+
+
+    opacity: 1;
+
+
+
+
+
+
+
+    transform: translateY(0); /* Move to final position */
 
 
 
