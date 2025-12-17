@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuku GO - Attraction Details</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <script src="../js/detail.js" defer></script>
+</head>
+<body>
+
+    <header class="main-header">
+        <nav class="main-nav">
+            <a href="../index.html" class="logo">Tuku GO</a>
+            <ul>
+                <li><a href="../index.html#story">The Story</a></li>
+                <li><a href="../index.html#map-container">Tour Map</a></li>
+                <li><a href="../index.html#attractions">Attractions</a></li>
+                <li><a href="about.html">About Us</a></li>
+            </ul>
+            <button class="hamburger-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+        <div class="mobile-nav">
+            <a href="../index.html#story">The Story</a>
+            <a href="../index.html#map-container">Tour Map</a>
+            <a href="../index.html#attractions">Attractions</a>
+            <a href="about.html">About Us</a>
+        </div>
+    </header>
+
+    <main id="detail-main-content">
+        <!-- Hero section will be dynamically generated -->
+        <section id="detail-hero" class="detail-hero">
+            <div class="hero-content">
+                <h1 id="hero-title" class="hero-title"></h1>
+            </div>
+        </section>
+
+        <div class="page-container">
+            <section class="detail-content">
+                <div class="detail-info">
+                    <h2 id="detail-title" class="detail-title"></h2>
+                    <p id="detail-description" class="detail-description"></p>
+                    <div id="detail-meta" class="detail-meta">
+                        <!-- Meta info like address and hours will be injected here -->
+                    </div>
+                </div>
+                <div class="detail-visuals">
+                    <!-- Panorama will be injected here if it exists -->
+                    <div id="panorama-container" class="detail-panorama" style="display: none;">
+                        <div id="panorama"></div>
+                    </div>
+                    <!-- Gallery will be injected here -->
+                    <div id="gallery-container" class="gallery-container" style="display: none;">
+                        <h3 class="gallery-title">Photo Gallery</h3>
+                        <div id="image-gallery" class="image-gallery"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="nearby-section" class="nearby-section" style="display: none;">
+                <h2 class="section-title">Nearby Attractions</h2>
+                <div id="nearby-grid" class="attraction-grid">
+                    <!-- Nearby attraction cards will be injected here -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 Tuku GO. All Rights Reserved. A professional website designed for Tuku.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+# Ignore the distribution directory
+dist/
+
+# System files
+.DS_Store
+Thumbs.db
