@@ -98,6 +98,14 @@ const I18n = {
         
         // Also update the lang attribute of the html tag for accessibility
         document.documentElement.lang = this.currentLang.split('-')[0];
+        this.updateLangButtonText(); // Update the text on the language button
+    },
+
+    updateLangButtonText() {
+        const langButtonTextElement = document.querySelector('.language-selector .current-lang-text');
+        if (langButtonTextElement) {
+            langButtonTextElement.textContent = this.t(`lang_${this.currentLang.replace('-', '_')}`);
+        }
     },
 
     initLangSelector() {
@@ -105,13 +113,35 @@ const I18n = {
         if (!langSelector) return;
 
         const langButton = langSelector.querySelector('.lang-button');
-        if (langButton) {
-            langButton.textContent = this.t(`lang_${this.currentLang.replace('-', '_')}`);
+        const langDropdown = langSelector.querySelector('.lang-dropdown');
+        const currentLangText = langSelector.querySelector('.current-lang-text'); // Get the span for current language text
+
+        // Initialize button text
+        if (currentLangText) {
+            currentLangText.textContent = this.t(`lang_${this.currentLang.replace('-', '_')}`);
+        }
+
+        if (langButton && langDropdown) {
+            langButton.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent document click from immediately closing
+                langDropdown.classList.toggle('is-open');
+                langButton.classList.toggle('is-open'); // Add class to button as well
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!langSelector.contains(e.target)) {
+                    langDropdown.classList.remove('is-open');
+                    langButton.classList.remove('is-open');
+                }
+            });
         }
 
         langSelector.querySelectorAll('.lang-dropdown a').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
+                langDropdown.classList.remove('is-open'); // Close dropdown on selection
+                langButton.classList.remove('is-open'); // Remove class from button
                 const lang = e.target.getAttribute('data-lang');
                 if (lang && lang !== this.currentLang) {
                     this.setLanguage(lang);

@@ -605,7 +605,15 @@ body {
 
 
 
+
+
+
+
     background: transparent;
+
+
+
+
 
 
 
@@ -613,7 +621,15 @@ body {
 
 
 
+
+
+
+
     color: var(--primary-color);
+
+
+
+
 
 
 
@@ -621,7 +637,15 @@ body {
 
 
 
+
+
+
+
     border-radius: 50px;
+
+
+
+
 
 
 
@@ -629,7 +653,15 @@ body {
 
 
 
+
+
+
+
     font-family: var(--font-body);
+
+
+
+
 
 
 
@@ -637,11 +669,83 @@ body {
 
 
 
+
+
+
+
     transition: background-color var(--transition-fast), color var(--transition-fast);
 
 
 
+
+
+
+
+    display: flex;
+
+
+
+
+
+
+
+    align-items: center;
+
+
+
+
+
+
+
+    gap: var(--spacing-xs);
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.lang-button .icon {
+
+
+
+
+
+
+
+    font-size: 1.2rem;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -653,7 +757,15 @@ body {
 
 
 
-.language-selector:hover .lang-button {
+
+
+
+
+.lang-button.is-open {
+
+
+
+
 
 
 
@@ -661,11 +773,27 @@ body {
 
 
 
+
+
+
+
     color: var(--surface-color);
 
 
 
+
+
+
+
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -677,7 +805,15 @@ body {
 
 
 
-    display: none;
+
+
+
+
+    display: none; /* Hidden by default */
+
+
+
+
 
 
 
@@ -685,7 +821,15 @@ body {
 
 
 
+
+
+
+
     top: 100%;
+
+
+
+
 
 
 
@@ -693,7 +837,15 @@ body {
 
 
 
+
+
+
+
     background-color: var(--surface-color);
+
+
+
+
 
 
 
@@ -701,7 +853,15 @@ body {
 
 
 
+
+
+
+
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+
+
+
+
 
 
 
@@ -709,7 +869,15 @@ body {
 
 
 
+
+
+
+
     padding: var(--spacing-s) 0;
+
+
+
+
 
 
 
@@ -717,11 +885,23 @@ body {
 
 
 
+
+
+
+
     min-width: 150px;
 
 
 
+
+
+
+
     z-index: 1100;
+
+
+
+
 
 
 
@@ -733,11 +913,27 @@ body {
 
 
 
-.language-selector:hover .lang-dropdown {
 
 
 
-    display: block;
+
+
+
+
+
+.lang-dropdown.is-open {
+
+
+
+
+
+
+
+    display: block; /* Show when 'is-open' class is present */
+
+
+
+
 
 
 

@@ -28,5 +28,6 @@
   "lang_zh_TW": "繁體中文",
   "lang_en": "English",
   "lang_ja": "日本語",
-  "lang_ko": "한국어"
+  "lang_ko": "한국어",
+  "lang_button_text": "語言"
 }
