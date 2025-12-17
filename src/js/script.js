@@ -14,18 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
     class App {
         constructor() {
             this.attractions = [];
-            this.map = null; // To hold the map instance
+            this.map = null;
+            // Define the global update function and bind it to the class instance
+            window.updatePageLanguage = this.updateLanguage.bind(this);
             this.init();
         }
 
         async init() {
             try {
-                // Initialize the i18n module first
                 await window.I18n.init();
-                
-                // Translate static parts of the page
-                window.I18n.translatePage();
-
                 this.initSmoothScroll();
                 this.initMobileNavigation();
                 this.initHeaderScrollEffect();
@@ -34,18 +31,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 this.initMap();
                 this.initScrollAnimations();
-
-                // Listen for language changes to re-render content
-                document.addEventListener('language-changed', () => {
-                    window.I18n.translatePage();
-                    this.renderAttractionCards();
-                    // We might need to update map popups as well
-                    this.updateMapPopups();
-                });
+                
+                // Perform initial translation
+                this.updateLanguage();
 
             } catch (error) {
                 console.error("Website initialization failed:", error);
             }
+        }
+        
+        // This function will be called by the i18n module
+        updateLanguage() {
+            window.I18n.translatePage();
+            this.renderAttractionCards();
+            this.updateMapPopups();
         }
 
         async loadAttractions() {
@@ -55,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 this.attractions = await response.json();
-                this.renderAttractionCards();
             } catch (error) {
                 console.error("Failed to load attraction data:", error);
                 const grid = document.getElementById('attraction-grid');
@@ -70,6 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error("Leaflet library not loaded.");
                 return;
             }
+            if (this.map) { // If map already exists, just update popups
+                this.updateMapPopups();
+                return;
+            }
             const mapCenter = [23.6766, 120.3906];
             this.map = L.map('map').setView(mapCenter, 15);
 
@@ -78,13 +80,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 subdomains: 'abcd',
                 maxZoom: 19
             }).addTo(this.map);
-
-            this.updateMapPopups();
         }
         
         updateMapPopups() {
             if (!this.map) return;
-            // Clear existing markers
+            
             this.map.eachLayer(layer => {
                 if (layer instanceof L.Marker) {
                     this.map.removeLayer(layer);
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const grid = document.getElementById('attraction-grid');
             if (!grid) return;
 
-            grid.innerHTML = ''; // Clear existing cards
+            grid.innerHTML = '';
             const fragment = document.createDocumentFragment();
             const lang = window.I18n.currentLang;
 
@@ -124,13 +124,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="card-content">
                         <h3 class="card-title">${attraction.name[lang]}</h3>
                         <p class="card-description">${attraction.description[lang]}</p>
-                        <span class="card-button" data-i18n="card_button">${window.I18n.t('card_button')}</span>
+                        <span class="card-button">${window.I18n.t('card_button')}</span>
                     </div>
                 `;
                 fragment.appendChild(card);
             });
 
             grid.appendChild(fragment);
+            // Re-initialize scroll animations for new cards
+            this.initScrollAnimations();
         }
 
         initSmoothScroll() {
@@ -180,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         initScrollAnimations() {
-            const animatedElements = document.querySelectorAll('.fade-in-element');
+            const animatedElements = document.querySelectorAll('.fade-in-element:not(.is-visible)');
             if (animatedElements.length === 0) return;
 
             const observer = new IntersectionObserver((entries, observer) => {

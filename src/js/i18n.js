@@ -86,14 +86,18 @@ const I18n = {
         localStorage.setItem('tuku_go_lang', lang);
         await this.loadTranslations(lang);
         
-        // Dispatch a custom event to notify other parts of the app that the language has changed
-        document.dispatchEvent(new CustomEvent('language-changed'));
+        // Call the global update function
+        if (typeof window.updatePageLanguage === 'function') {
+            window.updatePageLanguage();
+        }
     },
 
     translatePage() {
         document.querySelectorAll('[data-i18n]').forEach(element => {
             const key = element.getAttribute('data-i18n');
-            element.textContent = this.t(key);
+            if (element) {
+                element.textContent = this.t(key);
+            }
         });
         
         // Also update the lang attribute of the html tag for accessibility
