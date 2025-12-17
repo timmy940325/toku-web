@@ -1,143 +1,418 @@
 [
   {
     "id": "tuku-shokuekijo",
-    "name": "土庫庄役場",
     "folder": "土庫庄役場",
-    "category": "Historic",
+    "name": {
+      "zh-TW": "土庫庄役場",
+      "en": "Tuku Shokuekijo (Former Township Office)",
+      "ja": "土庫庄役場",
+      "ko": "투쿠 장역장"
+    },
+    "category": {
+      "zh-TW": "歷史建築",
+      "en": "Historic",
+      "ja": "歴史的建造物",
+      "ko": "역사적인 건물"
+    },
     "coordinates": { "lat": 23.6778, "lon": 120.3925 },
-    "description": "A beautiful example of Japanese colonial architecture, this former township office now serves as a cultural landmark.",
-    "address": "雲林縣土庫鎮中山路252號",
-    "opening_hours": "08:00 - 17:00 (Closed on Mondays)",
+    "description": {
+      "zh-TW": "融合了和風與西洋風格的優雅建築，是日治時期的庄役場（鄉公所），現為土庫鎮重要的文化地標。",
+      "en": "An elegant building blending Japanese and Western styles, this former township office from the Japanese colonial era now serves as an important cultural landmark in Tuku.",
+      "ja": "和風と洋風が融合した優雅な建物で、日本統治時代の庄役場（町役場）であり、現在は土庫鎮の重要な文化的ランドマークとなっています。",
+      "ko": "일본과 서양 스타일이 조화를 이루는 우아한 건물로, 일제 강점기 시절의 장역장(면사무소)이었으며 현재는 투쿠의 중요한 문화 랜드마크입니다."
+    },
+    "address": {
+      "zh-TW": "雲林縣土庫鎮中山路252號",
+      "en": "No. 252, Zhongshan Rd, Tuku Township, Yunlin County",
+      "ja": "雲林県土庫鎮中山路252号",
+      "ko": "윈린현 투쿠진 중산로 252호"
+    },
+    "opening_hours": {
+      "zh-TW": "08:00 - 17:00 (週一休館)",
+      "en": "08:00 - 17:00 (Closed on Mondays)",
+      "ja": "08:00 - 17:00 (月曜休館)",
+      "ko": "08:00 - 17:00 (월요일 휴관)"
+    },
     "card_image": "IMG_20251130_135317.jpg",
     "gallery_images": ["20251130_135814.jpg", "IMG_20251130_135317.jpg"],
     "panorama_image": "長條圖1.jpg"
   },
   {
     "id": "tuku-old-street",
-    "name": "土庫老街",
     "folder": "土庫老街",
-    "category": "Historic",
+    "name": {
+      "zh-TW": "土庫老街",
+      "en": "Tuku Old Street",
+      "ja": "土庫オールドストリート",
+      "ko": "투쿠 옛거리"
+    },
+    "category": {
+      "zh-TW": "歷史街區",
+      "en": "Historic",
+      "ja": "歴史地区",
+      "ko": "역사 지구"
+    },
     "coordinates": { "lat": 23.6781, "lon": 120.3927 },
-    "description": "Step back in time on Tuku's old street, filled with traditional shops and historical buildings.",
-    "address": "雲林縣土庫鎮中山路",
-    "opening_hours": "Open 24 hours",
+    "description": {
+      "zh-TW": "漫步在土庫老街，感受充滿傳統店鋪與歷史建築的懷舊氛圍。",
+      "en": "Stroll through Tuku Old Street and immerse yourself in a nostalgic atmosphere filled with traditional shops and historical buildings.",
+      "ja": "土庫オールドストリートを散策し、伝統的な店舗や歴史的建造物が立ち並ぶノスタルジックな雰囲気を感じてください。",
+      "ko": "투쿠 옛거리를 거닐며 전통 상점과 역사적인 건물로 가득한 향수 어린 분위기에 빠져보세요."
+    },
+    "address": {
+      "zh-TW": "雲林縣土庫鎮中山路",
+      "en": "Zhongshan Rd, Tuku Township, Yunlin County",
+      "ja": "雲林県土庫鎮中山路",
+      "ko": "윈린현 투쿠진 중산로"
+    },
+    "opening_hours": {
+      "zh-TW": "全天開放",
+      "en": "Open 24 hours",
+      "ja": "24時間開放",
+      "ko": "24시간 개방"
+    },
     "card_image": "IMG_20251130_144804.jpg",
     "gallery_images": ["IMG_20251130_144804.jpg", "IMG_20251130_144854.jpg", "IMG_20251130_145325.jpg"],
     "panorama_image": "長條圖1.jpg"
   },
   {
     "id": "tuku-story-house",
-    "name": "土庫故事屋",
     "folder": "土庫故事屋",
-    "category": "Culture",
+    "name": {
+      "zh-TW": "土庫故事屋",
+      "en": "Tuku Story House",
+      "ja": "土庫ストーリーハウス",
+      "ko": "투쿠 이야기집"
+    },
+    "category": {
+      "zh-TW": "文化",
+      "en": "Culture",
+      "ja": "文化",
+      "ko": "문화"
+    },
     "coordinates": { "lat": 23.6776, "lon": 120.3931 },
-    "description": "A charming place for children and adults to discover local stories and culture.",
-    "address": "雲林縣土庫鎮成功路59號",
-    "opening_hours": "Varies, check locally",
+    "description": {
+      "zh-TW": "一個讓大人和小孩都能探索在地故事與文化的迷人空間。",
+      "en": "A charming space for both adults and children to discover local stories and culture.",
+      "ja": "大人も子供も、地元の物語や文化を発見できる魅力的な空間です。",
+      "ko": "어른과 아이 모두 지역의 이야기와 문화를 발견할 수 있는 매력적인 공간입니다."
+    },
+    "address": {
+      "zh-TW": "雲林縣土庫鎮成功路59號",
+      "en": "No. 59, Chenggong Rd, Tuku Township, Yunlin County",
+      "ja": "雲林県土庫鎮成功路59号",
+      "ko": "윈린현 투쿠진 성공로 59호"
+    },
+    "opening_hours": {
+      "zh-TW": "開放時間不定，請以現場公告為準",
+      "en": "Opening hours vary, please refer to on-site announcements",
+      "ja": "営業時間は変動します。現地の告知をご確認ください",
+      "ko": "운영 시간은 변동될 수 있으므로 현장 공지를 참고하세요"
+    },
     "card_image": "IMG_20251130_134022.jpg",
     "gallery_images": ["IMG_20251130_134022.jpg", "IMG_20251130_134329.jpg"],
     "panorama_image": "長條圖.jpg"
   },
   {
     "id": "tuku-first-market",
-    "name": "土庫第一市場",
     "folder": "土庫第一市場",
-    "category": "Food",
+    "name": {
+      "zh-TW": "土庫第一市場",
+      "en": "Tuku First Market",
+      "ja": "土庫第一市場",
+      "ko": "투쿠 제1시장"
+    },
+    "category": {
+      "zh-TW": "美食",
+      "en": "Food",
+      "ja": "グルメ",
+      "ko": "음식"
+    },
     "coordinates": { "lat": 23.6761, "lon": 120.3910 },
-    "description": "Experience the vibrant heart of local life and taste delicious traditional Tuku snacks.",
-    "address": "雲林縣土庫鎮中山路71號",
-    "opening_hours": "06:00 - 13:00",
+    "description": {
+      "zh-TW": "體驗在地生活的 vibrant heart，品嚐美味的土庫傳統小吃。",
+      "en": "Experience the vibrant heart of local life and taste delicious traditional Tuku snacks.",
+      "ja": "地元の生活の活気ある中心を体験し、美味しい土庫の伝統的なスナックを味わってください。",
+      "ko": "활기찬 현지 생활의 중심을 경험하고 맛있는 전통 투쿠 간식을 맛보세요."
+    },
+    "address": {
+      "zh-TW": "雲林縣土庫鎮中山路71號",
+      "en": "No. 71, Zhongshan Rd, Tuku Township, Yunlin County",
+      "ja": "雲林県土庫鎮中山路71号",
+      "ko": "윈린현 투쿠진 중산로 71호"
+    },
+    "opening_hours": {
+      "zh-TW": "06:00 - 13:00",
+      "en": "06:00 - 13:00",
+      "ja": "06:00 - 13:00",
+      "ko": "06:00 - 13:00"
+    },
     "card_image": "20251130_145420.jpg",
     "gallery_images": ["20251130_145420.jpg", "IMG_20251130_145203.jpg"],
     "panorama_image": "長條圖.jpg"
   },
   {
     "id": "tuku-shuntian-temple",
-    "name": "土庫順天宮",
     "folder": "土庫順天宮",
-    "category": "Worship",
+    "name": {
+      "zh-TW": "土庫順天宮",
+      "en": "Tuku Shuntian Temple",
+      "ja": "土庫順天宮",
+      "ko": "투쿠 순천궁"
+    },
+    "category": {
+      "zh-TW": "信仰",
+      "en": "Worship",
+      "ja": "信仰",
+      "ko": "신앙"
+    },
     "coordinates": { "lat": 23.6766, "lon": 120.3906 },
-    "description": "The spiritual heart of Tuku, this grand temple is a masterpiece of religious art and architecture.",
-    "address": "雲林縣土庫鎮中正路109號",
-    "opening_hours": "05:30 - 20:30",
+    "description": {
+      "zh-TW": "土庫的信仰中心，這座宏偉的廟宇是宗教藝術與建築的傑作。",
+      "en": "The spiritual heart of Tuku, this grand temple is a masterpiece of religious art and architecture.",
+      "ja": "土庫の信仰の中心であるこの壮大な寺院は、宗教芸術と建築の傑作です。",
+      "ko": "투쿠의 정신적 중심지인 이 웅장한 사원은 종교 예술과 건축의 걸작입니다."
+    },
+    "address": {
+      "zh-TW": "雲林縣土庫鎮中正路109號",
+      "en": "No. 109, Zhongzheng Rd, Tuku Township, Yunlin County",
+      "ja": "雲林県土庫鎮中正路109号",
+      "ko": "윈린현 투쿠진 중정로 109호"
+    },
+    "opening_hours": {
+      "zh-TW": "05:30 - 20:30",
+      "en": "05:30 - 20:30",
+      "ja": "05:30 - 20:30",
+      "ko": "05:30 - 20:30"
+    },
     "card_image": "土庫順天宮.png",
     "gallery_images": ["土庫順天宮.png", "IMG_20251130_144952.jpg"],
     "panorama_image": "長條圖1.jpg"
   },
   {
     "id": "qiushan-jiao-coffee",
-    "name": "丘山角珈琲室",
     "folder": "丘山角珈琲室",
-    "category": "Coffee",
+    "name": {
+      "zh-TW": "丘山角珈琲室",
+      "en": "Qiushan Jiao Coffee",
+      "ja": "丘山角珈琲室",
+      "ko": "구산각 커피숍"
+    },
+    "category": {
+      "zh-TW": "咖啡",
+      "en": "Coffee",
+      "ja": "コーヒー",
+      "ko": "커피"
+    },
     "coordinates": { "lat": 23.6761, "lon": 120.3910, "placeholder": true },
-    "description": "A cozy corner to relax and enjoy a cup of expertly brewed coffee with a local touch.",
-    "address": "雲林縣土庫鎮中山路167號",
-    "opening_hours": "Varies, check locally",
+    "description": {
+      "zh-TW": "在一個舒適的角落放鬆身心，享受一杯帶有在地風味的專業手沖咖啡。",
+      "en": "Relax in a cozy corner and enjoy a cup of expertly brewed coffee with a local touch.",
+      "ja": "居心地の良いコーナーでリラックスし、地元の風味を感じる専門的に淹れられたコーヒーをお楽しみください。",
+      "ko": "아늑한 구석에서 휴식을 취하며 현지의 감성이 더해진 전문적으로 내린 커피 한 잔을 즐겨보세요."
+    },
+    "address": {
+      "zh-TW": "雲林縣土庫鎮中山路167號",
+      "en": "No. 167, Zhongshan Rd, Tuku Township, Yunlin County",
+      "ja": "雲林県土庫鎮中山路167号",
+      "ko": "윈린현 투쿠진 중산로 167호"
+    },
+    "opening_hours": {
+      "zh-TW": "開放時間不定，請以現場公告為準",
+      "en": "Opening hours vary, please refer to on-site announcements",
+      "ja": "営業時間は変動します。現地の告知をご確認ください",
+      "ko": "운영 시간은 변동될 수 있으므로 현장 공지를 참고하세요"
+    },
     "card_image": "IMG_20251130_153736.jpg",
     "gallery_images": ["20251130_153953.jpg", "IMG_20251130_153736.jpg", "IMG_20251130_153841.jpg"],
     "panorama_image": "長條圖1.jpg"
   },
   {
     "id": "gao-long-zhen-bakery",
-    "name": "高隆珍餅舖",
     "folder": "高隆珍餅舖",
-    "category": "Food",
+    "name": {
+      "zh-TW": "高隆珍餅舖",
+      "en": "Gao Long Zhen Bakery",
+      "ja": "高隆珍餅舖",
+      "ko": "가오롱전 빵집"
+    },
+    "category": {
+      "zh-TW": "美食",
+      "en": "Food",
+      "ja": "グルメ",
+      "ko": "음식"
+    },
     "coordinates": { "lat": 23.6761, "lon": 120.3910, "placeholder": true },
-    "description": "A famous local bakery offering traditional pastries that have been loved for generations.",
-    "address": "雲林縣土庫鎮中山路98號",
-    "opening_hours": "08:00 - 21:00",
+    "description": {
+      "zh-TW": "一家著名的在地麵包店，提供深受各代人喜愛的傳統糕點。",
+      "en": "A famous local bakery offering traditional pastries that have been loved for generations.",
+      "ja": "世代を超えて愛されてきた伝統的な菓子を提供する有名な地元のパン屋。",
+      "ko": "여러 세대에 걸쳐 사랑받아 온 전통 과자를 제공하는 유명한 현지 빵집."
+    },
+    "address": {
+      "zh-TW": "雲林縣土庫鎮中山路98號",
+      "en": "No. 98, Zhongshan Rd, Tuku Township, Yunlin County",
+      "ja": "雲林県土庫鎮中山路98号",
+      "ko": "윈린현 투쿠진 중산로 98호"
+    },
+    "opening_hours": {
+      "zh-TW": "08:00 - 21:00",
+      "en": "08:00 - 21:00",
+      "ja": "08:00 - 21:00",
+      "ko": "08:00 - 21:00"
+    },
     "card_image": "IMG_20251130_154625.jpg",
     "gallery_images": ["IMG_20251130_154523.jpg", "IMG_20251130_154625.jpg"],
     "panorama_image": "長條圖.jpg"
   },
   {
     "id": "shun-cheng-oil-factory",
-    "name": "順成油廠",
     "folder": "順成油廠",
-    "category": "Experience",
+    "name": {
+      "zh-TW": "順成油廠",
+      "en": "Shun Cheng Oil Factory",
+      "ja": "順成製油工場",
+      "ko": "순청 기름 공장"
+    },
+    "category": {
+      "zh-TW": "體驗",
+      "en": "Experience",
+      "ja": "体験",
+      "ko": "체험"
+    },
     "coordinates": { "lat": 23.6754, "lon": 120.3918 },
-    "description": "Discover the traditional process of making fragrant sesame oil at this historic factory.",
-    "address": "雲林縣土庫鎮光明路166號",
-    "opening_hours": "08:00 - 18:00",
+    "description": {
+      "zh-TW": "在這家歷史悠久的工廠裡，探索製作香濃麻油的傳統過程。",
+      "en": "Discover the traditional process of making fragrant sesame oil at this historic factory.",
+      "ja": "この歴史ある工場で、香り高いごま油を作る伝統的な工程を発見してください。",
+      "ko": "이 역사적인 공장에서 향기로운 참기름을 만드는 전통적인 과정을 발견해보세요."
+    },
+    "address": {
+      "zh-TW": "雲林縣土庫鎮光明路166號",
+      "en": "No. 166, Guangming Rd, Tuku Township, Yunlin County",
+      "ja": "雲林県土庫鎮光明路166号",
+      "ko": "윈린현 투쿠진 광명로 166호"
+    },
+    "opening_hours": {
+      "zh-TW": "08:00 - 18:00",
+      "en": "08:00 - 18:00",
+      "ja": "08:00 - 18:00",
+      "ko": "08:00 - 18:00"
+    },
     "card_image": "IMG_20251130_152130.jpg",
     "gallery_images": ["IMG_20251130_152130.jpg"],
     "panorama_image": "長條圖.jpg"
   },
   {
     "id": "yuan-shun-oil-factory",
-    "name": "源順芝麻觀光油廠",
     "folder": "源順芝麻觀光油廠",
-    "category": "Experience",
+    "name": {
+      "zh-TW": "源順芝麻觀光油廠",
+      "en": "Yuan Shun Sesame Oil Tourist Factory",
+      "ja": "源順ごま油観光工場",
+      "ko": "위안순 참기름 관광 공장"
+    },
+    "category": {
+      "zh-TW": "體驗",
+      "en": "Experience",
+      "ja": "体験",
+      "ko": "체험"
+    },
     "coordinates": { "lat": 23.6723, "lon": 120.3953 },
-    "description": "A modern tourist factory where you can learn all about sesame oil production and its benefits.",
-    "address": "雲林縣土庫鎮成功路1-62號",
-    "opening_hours": "08:00 - 17:30",
+    "description": {
+      "zh-TW": "一個現代化的觀光工廠，您可以在這裡了解麻油生產的所有知識及其益處。",
+      "en": "A modern tourist factory where you can learn all about sesame oil production and its benefits.",
+      "ja": "ごま油の製造とその利点についてすべてを学ぶことができる近代的な観光工場。",
+      "ko": "참기름 생산과 그 효능에 대해 모든 것을 배울 수 있는 현대적인 관광 공장."
+    },
+    "address": {
+      "zh-TW": "雲林縣土庫鎮成功路1-62號",
+      "en": "No. 1-62, Chenggong Rd, Tuku Township, Yunlin County",
+      "ja": "雲林県土庫鎮成功路1-62号",
+      "ko": "윈린현 투쿠진 성공로 1-62호"
+    },
+    "opening_hours": {
+      "zh-TW": "08:00 - 17:30",
+      "en": "08:00 - 17:30",
+      "ja": "08:00 - 17:30",
+      "ko": "08:00 - 17:30"
+    },
     "card_image": "20251130_160552.jpg",
     "gallery_images": ["20251130_160552.jpg", "20251130_160647.jpg", "20251130_161308.jpg"],
     "panorama_image": "長條圖1.jpg"
   },
   {
     "id": "wande-hospital",
-    "name": "萬得醫院",
     "folder": "萬得醫院",
-    "category": "Historic",
+    "name": {
+      "zh-TW": "萬得醫院",
+      "en": "Wande Hospital",
+      "ja": "萬得醫院",
+      "ko": "만득병원"
+    },
+    "category": {
+      "zh-TW": "歷史建築",
+      "en": "Historic",
+      "ja": "歴史的建造物",
+      "ko": "역사적인 건물"
+    },
     "coordinates": { "lat": 23.6759, "lon": 120.3912 },
-    "description": "A former hospital that is now a preserved historical site, offering a glimpse into Tuku's past.",
-    "address": "雲林縣土庫鎮中山路185號",
-    "opening_hours": "Exterior view only",
+    "description": {
+      "zh-TW": "一家前身為醫院的建築，現在是一個保存完好的歷史遺跡，讓人一窺土庫的過去。",
+      "en": "A former hospital that is now a preserved historical site, offering a glimpse into Tuku's past.",
+      "ja": "元病院であったこの建物は、現在では保存状態の良い史跡となっており、土庫の過去を垣間見ることができます。",
+      "ko": "이전에는 병원이었던 이 건물은 현재 잘 보존된 역사 유적으로, 투쿠의 과거를 엿볼 수 있는 기회를 제공합니다."
+    },
+    "address": {
+      "zh-TW": "雲林縣土庫鎮中山路185號",
+      "en": "No. 185, Zhongshan Rd, Tuku Township, Yunlin County",
+      "ja": "雲林県土庫鎮中山路185号",
+      "ko": "윈린현 투쿠진 중산로 185호"
+    },
+    "opening_hours": {
+      "zh-TW": "僅供外部參觀",
+      "en": "Exterior view only",
+      "ja": "外観のみ見学可能",
+      "ko": "외부 관람만 가능"
+    },
     "card_image": "20251130_141957.jpg",
     "gallery_images": ["20251130_141957.jpg", "20251130_142040.jpg", "20251130_142216.jpg"],
     "panorama_image": "長條圖1.jpg"
   },
   {
     "id": "koka-kuka-coffee",
-    "name": "KOKA庫咖咖啡",
     "folder": "KOKA庫咖咖啡",
-    "category": "Coffee",
+    "name": {
+      "zh-TW": "KOKA庫咖咖啡",
+      "en": "KOKA Kuka Coffee",
+      "ja": "KOKA庫咖コーヒー",
+      "ko": "코카 쿠카 커피"
+    },
+    "category": {
+      "zh-TW": "咖啡",
+      "en": "Coffee",
+      "ja": "コーヒー",
+      "ko": "커피"
+    },
     "coordinates": { "lat": 23.6762, "lon": 120.3911 },
-    "description": "Enjoy specialty coffee in a stylish and modern cafe environment.",
-    "address": "雲林縣土庫鎮大同路125號",
-    "opening_hours": "Varies, check locally",
+    "description": {
+      "zh-TW": "在時尚現代的咖啡館環境中，品嚐一杯特色咖啡。",
+      "en": "Enjoy a cup of specialty coffee in a stylish and modern cafe environment.",
+      "ja": "スタイリッシュでモダンなカフェ環境で、スペシャルティコーヒーをお楽しみください。",
+      "ko": "세련되고 현대적인 카페 환경에서 스페셜티 커피 한 잔을 즐겨보세요."
+    },
+    "address": {
+      "zh-TW": "雲林縣土庫鎮大同路125號",
+      "en": "No. 125, Datong Rd, Tuku Township, Yunlin County",
+      "ja": "雲林県土庫鎮大同路125号",
+      "ko": "윈린현 투쿠진 대동로 125호"
+    },
+    "opening_hours": {
+      "zh-TW": "開放時間不定，請以現場公告為準",
+      "en": "Opening hours vary, please refer to on-site announcements",
+      "ja": "営業時間は変動します。現地の告知をご確認ください",
+      "ko": "운영 시간은 변동될 수 있으므로 현장 공지를 참고하세요"
+    },
     "card_image": "IMG_20251130_150217.jpg",
     "gallery_images": ["IMG_20251130_150217.jpg", "IMG_20251130_150300.jpg"],
     "panorama_image": "長條圖.jpg"

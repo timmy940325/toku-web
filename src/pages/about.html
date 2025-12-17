@@ -10,6 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/i18n.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await window.I18n.init();
+            window.I18n.translatePage();
+            document.addEventListener('language-changed', () => window.I18n.translatePage());
+        });
+    </script>
 </head>
 <body>
 
@@ -17,10 +25,19 @@
         <nav class="main-nav">
             <a href="../index.html" class="logo">Tuku GO</a>
             <ul>
-                <li><a href="../index.html#story">The Story</a></li>
-                <li><a href="../index.html#map-container">Tour Map</a></li>
-                <li><a href="../index.html#attractions">Attractions</a></li>
-                <li><a href="about.html">About Us</a></li>
+                <li><a href="../index.html#story" data-i18n="nav_story">The Story</a></li>
+                <li><a href="../index.html#map-container" data-i18n="nav_map">Tour Map</a></li>
+                <li><a href="../index.html#attractions" data-i18n="nav_attractions">Attractions</a></li>
+                <li><a href="about.html" data-i18n="nav_about">About Us</a></li>
+                <li class="language-selector">
+                    <button class="lang-button">Language</button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="zh-TW">繁體中文</a></li>
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="ja">日本語</a></li>
+                        <li><a href="#" data-lang="ko">한국어</a></li>
+                    </ul>
+                </li>
             </ul>
             <button class="hamburger-menu">
                 <span></span>
@@ -29,33 +46,33 @@
             </button>
         </nav>
         <div class="mobile-nav">
-            <a href="../index.html#story">The Story</a>
-            <a href="../index.html#map-container">Tour Map</a>
-            <a href="../index.html#attractions">Attractions</a>
-            <a href="about.html">About Us</a>
+            <a href="../index.html#story" data-i18n="nav_story">The Story</a>
+            <a href="../index.html#map-container" data-i18n="nav_map">Tour Map</a>
+            <a href="../index.html#attractions" data-i18n="nav_attractions">Attractions</a>
+            <a href="about.html" data-i18n="nav_about">About Us</a>
         </div>
     </header>
 
     <main>
         <section class="detail-hero" style="background-image: url('https://placehold.co/1920x400/cccccc/aaaaaa?text=About+Tuku+GO');">
             <div class="hero-content">
-                <h1 class="hero-title">About Us</h1>
+                <h1 class="hero-title" data-i18n="about_title">About Us</h1>
             </div>
         </section>
 
         <div class="page-container">
             <section class="story-section">
                 <div class="story-content">
-                    <h2 class="section-title">Our Mission</h2>
-                    <p>Welcome to Tuku GO! This project was born from a passion for the rich, untold stories of Tuku, Yunlin. Our mission is to provide a modern, beautiful, and comprehensive guide for travelers and locals alike to discover the unique charm of this wonderful town.</p>
-                    <p>This website was designed and developed with care, aiming to be a living project that grows with the community. We hope you enjoy your journey through Tuku!</p>
+                    <h2 class="section-title" data-i18n="about_mission_title">Our Mission</h2>
+                    <p data-i18n="about_mission_p1">Welcome to Tuku GO! This project was born from a passion for the rich, untold stories of Tuku, Yunlin. Our mission is to provide a modern, beautiful, and comprehensive guide for travelers and locals alike to discover the unique charm of this wonderful town.</p>
+                    <p data-i18n="about_mission_p2">This website was designed and developed with care, aiming to be a living project that grows with the community. We hope you enjoy your journey through Tuku!</p>
                 </div>
             </section>
         </div>
     </main>
 
     <footer class="main-footer">
-        <p>&copy; 2025 Tuku GO. All Rights Reserved. A professional website designed for Tuku.</p>
+        <p data-i18n="footer_text">&copy; 2025 Tuku GO. All Rights Reserved. A professional website designed for Tuku.</p>
     </footer>
 
 </body>

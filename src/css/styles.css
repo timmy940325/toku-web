@@ -563,11 +563,237 @@ body {
 
 .image-gallery img:hover {
 
+
+
     transform: scale(1.05);
+
+
 
     box-shadow: 0 8px 25px rgba(0,0,0,0.15);
 
+
+
 }
+
+
+
+
+
+
+
+/* --- Language Selector --- */
+
+
+
+.language-selector {
+
+
+
+    position: relative;
+
+
+
+}
+
+
+
+
+
+
+
+.lang-button {
+
+
+
+    background: transparent;
+
+
+
+    border: 1px solid var(--primary-color);
+
+
+
+    color: var(--primary-color);
+
+
+
+    padding: var(--spacing-s) var(--spacing-m);
+
+
+
+    border-radius: 50px;
+
+
+
+    cursor: pointer;
+
+
+
+    font-family: var(--font-body);
+
+
+
+    font-weight: 500;
+
+
+
+    transition: background-color var(--transition-fast), color var(--transition-fast);
+
+
+
+}
+
+
+
+
+
+
+
+.lang-button:hover,
+
+
+
+.language-selector:hover .lang-button {
+
+
+
+    background-color: var(--primary-color);
+
+
+
+    color: var(--surface-color);
+
+
+
+}
+
+
+
+
+
+
+
+.lang-dropdown {
+
+
+
+    display: none;
+
+
+
+    position: absolute;
+
+
+
+    top: 100%;
+
+
+
+    right: 0;
+
+
+
+    background-color: var(--surface-color);
+
+
+
+    border-radius: var(--border-radius);
+
+
+
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+
+
+
+    list-style: none;
+
+
+
+    padding: var(--spacing-s) 0;
+
+
+
+    margin-top: var(--spacing-s);
+
+
+
+    min-width: 150px;
+
+
+
+    z-index: 1100;
+
+
+
+}
+
+
+
+
+
+
+
+.language-selector:hover .lang-dropdown {
+
+
+
+    display: block;
+
+
+
+}
+
+
+
+
+
+
+
+.lang-dropdown li a {
+
+
+
+    display: block;
+
+
+
+    padding: var(--spacing-s) var(--spacing-l);
+
+
+
+    color: var(--text-primary);
+
+
+
+    text-decoration: none;
+
+
+
+    transition: background-color var(--transition-fast);
+
+
+
+}
+
+
+
+
+
+
+
+.lang-dropdown li a:hover {
+
+
+
+    background-color: #f0f0f0;
+
+
+
+}
+
+
+
+
 
 size: cover; background-position: center; position: relative; text-align: center;
 }

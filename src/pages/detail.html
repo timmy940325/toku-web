@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
     
     <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <script src="../js/i18n.js"></script>
     <script src="../js/detail.js" defer></script>
 </head>
 <body>
@@ -21,10 +22,19 @@
         <nav class="main-nav">
             <a href="../index.html" class="logo">Tuku GO</a>
             <ul>
-                <li><a href="../index.html#story">The Story</a></li>
-                <li><a href="../index.html#map-container">Tour Map</a></li>
-                <li><a href="../index.html#attractions">Attractions</a></li>
-                <li><a href="about.html">About Us</a></li>
+                <li><a href="../index.html#story" data-i18n="nav_story">The Story</a></li>
+                <li><a href="../index.html#map-container" data-i18n="nav_map">Tour Map</a></li>
+                <li><a href="../index.html#attractions" data-i18n="nav_attractions">Attractions</a></li>
+                <li><a href="about.html" data-i18n="nav_about">About Us</a></li>
+                <li class="language-selector">
+                    <button class="lang-button">Language</button>
+                    <ul class="lang-dropdown">
+                        <li><a href="#" data-lang="zh-TW">繁體中文</a></li>
+                        <li><a href="#" data-lang="en">English</a></li>
+                        <li><a href="#" data-lang="ja">日本語</a></li>
+                        <li><a href="#" data-lang="ko">한국어</a></li>
+                    </ul>
+                </li>
             </ul>
             <button class="hamburger-menu">
                 <span></span>
@@ -33,10 +43,10 @@
             </button>
         </nav>
         <div class="mobile-nav">
-            <a href="../index.html#story">The Story</a>
-            <a href="../index.html#map-container">Tour Map</a>
-            <a href="../index.html#attractions">Attractions</a>
-            <a href="about.html">About Us</a>
+            <a href="../index.html#story" data-i18n="nav_story">The Story</a>
+            <a href="../index.html#map-container" data-i18n="nav_map">Tour Map</a>
+            <a href="../index.html#attractions" data-i18n="nav_attractions">Attractions</a>
+            <a href="about.html" data-i18n="nav_about">About Us</a>
         </div>
     </header>
 
@@ -64,14 +74,14 @@
                     </div>
                     <!-- Gallery will be injected here -->
                     <div id="gallery-container" class="gallery-container" style="display: none;">
-                        <h3 class="gallery-title">Photo Gallery</h3>
+                        <h3 class="gallery-title" data-i18n="detail_gallery_title">Photo Gallery</h3>
                         <div id="image-gallery" class="image-gallery"></div>
                     </div>
                 </div>
             </section>
 
             <section id="nearby-section" class="nearby-section" style="display: none;">
-                <h2 class="section-title">Nearby Attractions</h2>
+                <h2 class="section-title" data-i18n="detail_nearby_title">Nearby Attractions</h2>
                 <div id="nearby-grid" class="attraction-grid">
                     <!-- Nearby attraction cards will be injected here -->
                 </div>
@@ -80,7 +90,7 @@
     </main>
 
     <footer class="main-footer">
-        <p>&copy; 2025 Tuku GO. All Rights Reserved. A professional website designed for Tuku.</p>
+        <p data-i18n="footer_text">&copy; 2025 Tuku GO. All Rights Reserved. A professional website designed for Tuku.</p>
     </footer>
 
 </body>
