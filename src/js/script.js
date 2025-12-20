@@ -9,8 +9,7 @@
  */
 "use strict";
 
-document.addEventListener('DOMContentLoaded', () => {
-
+function startApp() {
     class App {
         constructor() {
             this.attractions = [];
@@ -333,4 +332,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     new App();
-});
+}
+
