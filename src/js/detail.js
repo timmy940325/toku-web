@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         async loadAttractionData(attractionId) {
             try {
-                const response = await fetch('/toku-web/attractions.json');
+                const response = await fetch('../attractions.json');
                 if (!response.ok) {
                     throw new Error(window.I18n.t('error_db_load'));
                 }

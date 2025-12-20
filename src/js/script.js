@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         async loadAttractions() {
             try {
-                const response = await fetch('/toku-web/attractions.json');
+                const response = await fetch('attractions.json');
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
