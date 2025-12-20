@@ -16,6 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
             this.attractions = [];
             this.map = null;
             this.markers = {}; // To store marker instances
+            this.markerClusterGroup = null; // For marker clustering
+            this.categoryLayers = {}; // To hold layers for filtering
+            this.activeFilters = new Set(); // To track active filters
+            
             // Define the global update function and bind it to the class instance
             window.updatePageLanguage = this.updateLanguage.bind(this);
             this.init();
@@ -31,6 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 await this.loadAttractions();
                 
                 this.initMap();
+                this.createMarkers();
+                this.renderMapFilters();
+                this.filterMarkers('All'); // Show all markers initially
+                
                 this.initScrollAnimations();
                 
                 // Perform initial translation
@@ -41,17 +49,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        getCategoryStyle(category) {
-            const styles = {
-                '歷史建築': { color: '#8B4513' }, // SaddleBrown
-                '歷史街區': { color: '#A0522D' }, // Sienna
-                '美食': { color: '#FFA500' },     // Orange
-                '信仰': { color: '#FFD700' },     // Gold
-                '文化': { color: '#800080' },     // Purple
-                '體驗': { color: '#008080' },     // Teal
-                '咖啡': { color: '#654321' }      // DarkBrown (custom)
+        getCategoryIcon(category) {
+            const icons = {
+                '歷史建築': { icon: 'fa-landmark', color: '#8B4513' },
+                '歷史街區': { icon: 'fa-landmark', color: '#A0522D' },
+                '美食': { icon: 'fa-utensils', color: '#FFA500' },
+                '信仰': { icon: 'fa-place-of-worship', color: '#FFD700' },
+                '文化': { icon: 'fa-palette', color: '#800080' },
+                '體驗': { icon: 'fa-hand-paper', color: '#008080' },
+                '咖啡': { icon: 'fa-coffee', color: '#654321' }
             };
-            return styles[category] || { color: '#708090' }; // Default to SlateGray
+            const style = icons[category] || { icon: 'fa-map-marker-alt', color: '#708090' };
+            
+            return L.divIcon({
+                className: 'custom-fa-icon',
+                html: `<div class="marker-icon-background" style="background-color: ${style.color};"><i class="fa-solid ${style.icon}"></i></div>`,
+                iconSize: [40, 40],
+                iconAnchor: [20, 40]
+            });
         }
 
         panToMarker(attractionId) {
@@ -61,7 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     animate: true,
                     duration: 1.5
                 });
-                marker.openPopup();
+                this.markerClusterGroup.zoomToShowLayer(marker, () => {
+                    marker.openPopup();
+                });
             }
         }
         
@@ -69,7 +86,9 @@ document.addEventListener('DOMContentLoaded', () => {
         updateLanguage() {
             window.I18n.translatePage();
             this.renderAttractionCards();
-            this.updateMapPopups();
+            this.createMarkers(); // Re-create markers for new popup language
+            this.renderMapFilters(); // Re-render filters for new language
+            this.filterMarkers('All'); // Re-apply all filter
         }
 
         async loadAttractions() {
@@ -93,45 +112,92 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.error("Leaflet library not loaded.");
                 return;
             }
-            if (this.map) { // If map already exists, just update popups
-                this.updateMapPopups();
-                return;
+            if (this.map) {
+                this.map.remove(); // Remove and re-initialize map on language change etc.
             }
             const mapCenter = [23.6766, 120.3906];
             this.map = L.map('map').setView(mapCenter, 15);
 
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-                subdomains: 'abcd',
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                 maxZoom: 19
             }).addTo(this.map);
+
+            this.markerClusterGroup = L.markerClusterGroup().addTo(this.map);
         }
         
-        updateMapPopups() {
+        createMarkers() {
             if (!this.map) return;
             
-            // Clear existing markers from the map
-            Object.values(this.markers).forEach(marker => marker.removeFrom(this.map));
+            // Clear existing layers
+            Object.values(this.categoryLayers).forEach(layer => layer.clearLayers());
             this.markers = {};
 
             const lang = window.I18n.currentLang;
 
             this.attractions.forEach(attraction => {
-                if (attraction.coordinates && attraction.coordinates.lat) {
-                    const style = this.getCategoryStyle(attraction.category['zh-TW']); // Use zh-TW for consistent key
-                    const icon = L.divIcon({
-                        className: 'custom-div-icon',
-                        html: `<div style="background-color: ${style.color};" class="marker-pin"></div>`,
-                        iconSize: [30, 42],
-                        iconAnchor: [15, 42]
-                    });
+                const category = attraction.category['zh-TW'];
+                if (!this.categoryLayers[category]) {
+                    this.categoryLayers[category] = L.layerGroup();
+                }
 
-                    const marker = L.marker([attraction.coordinates.lat, attraction.coordinates.lon], { icon: icon }).addTo(this.map);
+                if (attraction.coordinates && attraction.coordinates.lat) {
+                    const icon = this.getCategoryIcon(category);
+                    const marker = L.marker([attraction.coordinates.lat, attraction.coordinates.lon], { icon: icon });
+                    
                     const popupContent = `<b>${attraction.name[lang]}</b><br><a href="pages/detail.html?id=${attraction.id}">${window.I18n.t('card_button')}</a>`;
                     marker.bindPopup(popupContent);
 
                     this.markers[attraction.id] = marker;
+                    this.categoryLayers[category].addLayer(marker);
                 }
+            });
+        }
+
+        renderMapFilters() {
+            const filtersContainer = document.getElementById('map-filters');
+            if (!filtersContainer) return;
+
+            const categories = ['All', ...Object.keys(this.categoryLayers)];
+            filtersContainer.innerHTML = '';
+            const fragment = document.createDocumentFragment();
+
+            categories.forEach(category => {
+                const button = document.createElement('button');
+                button.className = 'map-filter-button';
+                button.dataset.filter = category;
+                // For 'All', use a generic i18n key, otherwise use the category name
+                const buttonText = category === 'All' ? window.I18n.t('filter_all') : this.attractions.find(a => a.category['zh-TW'] === category).category[window.I18n.currentLang];
+                button.textContent = buttonText;
+                fragment.appendChild(button);
+            });
+
+            filtersContainer.appendChild(fragment);
+
+            filtersContainer.querySelectorAll('.map-filter-button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const filterKey = e.currentTarget.dataset.filter;
+                    this.filterMarkers(filterKey);
+                });
+            });
+        }
+
+        filterMarkers(filterKey) {
+            this.markerClusterGroup.clearLayers();
+
+            if (filterKey === 'All') {
+                Object.values(this.categoryLayers).forEach(layer => {
+                    this.markerClusterGroup.addLayer(layer);
+                });
+            } else {
+                if (this.categoryLayers[filterKey]) {
+                    this.markerClusterGroup.addLayer(this.categoryLayers[filterKey]);
+                }
+            }
+
+            // Update active state for buttons
+            document.querySelectorAll('#map-filters .map-filter-button').forEach(button => {
+                button.classList.toggle('active', button.dataset.filter === filterKey);
             });
         }
 

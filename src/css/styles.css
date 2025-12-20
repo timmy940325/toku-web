@@ -411,6 +411,83 @@ body {
     box-shadow: 0 10px 40px rgba(0,0,0,0.1);
 }
 
+/* New Map Filter Styles */
+.map-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--spacing-s);
+    margin-bottom: var(--spacing-l);
+}
+
+.map-filter-button {
+    background-color: var(--surface-color);
+    border: 1px solid #ddd;
+    color: var(--text-secondary);
+    padding: var(--spacing-s) var(--spacing-m);
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-weight: 500;
+    transition: all var(--transition-fast);
+}
+
+.map-filter-button:hover {
+    background-color: #f0f0f0;
+    border-color: #ccc;
+}
+
+.map-filter-button.active {
+    background-color: var(--primary-color);
+    color: var(--surface-color);
+    border-color: var(--primary-color);
+    font-weight: 700;
+    box-shadow: 0 4px 10px rgba(138, 51, 36, 0.2);
+}
+
+
+/* New Font Awesome Marker Icon Styles */
+.custom-fa-icon .marker-icon-background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    border: 2px solid var(--surface-color);
+    position: relative;
+    transform-origin: center bottom;
+    animation: drop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes drop {
+    0% { transform: translateY(-100px) scale(0.5); opacity: 0; }
+    100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+
+.custom-fa-icon .marker-icon-background i {
+    color: white;
+    font-size: 18px;
+}
+
+/* Triangle for the marker pin */
+.custom-fa-icon .marker-icon-background::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 12px solid; /* Color will be inherited from parent's background-color */
+    border-top-color: inherit;
+}
+
+
 /* Custom Map Marker Styles */
 .custom-div-icon .marker-pin {
     width: 30px;
