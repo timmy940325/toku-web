@@ -200,7 +200,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         renderDetailMap() {
             const mapContainer = document.getElementById('detail-map');
-            if (!mapContainer || !this.currentAttraction.coordinates) return;
+            // Guard clause: Do not render map if container or coordinates are missing/invalid.
+            if (!mapContainer || !this.currentAttraction.coordinates || this.currentAttraction.coordinates.placeholder) {
+                if(mapContainer) mapContainer.style.display = 'none'; // Ensure container is hidden
+                return;
+            }
+            mapContainer.style.display = 'block';
 
             if (this.detailMap) {
                 this.detailMap.remove();
