@@ -16,16 +16,23 @@ document.addEventListener('DOMContentLoaded', () => {
         constructor() {
             this.attractions = [];
             this.currentAttraction = null;
+            this.galleryImages = [];
+            this.currentLightboxIndex = 0;
+            this.detailMap = null;
             this.init();
         }
 
         async init() {
             try {
-                // 1. Load translations first
+                // 1. Set up shared UI components
+                this.initBackToTopButton();
+                this.initLightbox();
+
+                // 2. Load translations first
                 await window.I18n.init();
                 this.initLangSelector();
 
-                // 2. Get attraction ID from URL
+                // 3. Get attraction ID from URL
                 const urlParams = new URLSearchParams(window.location.search);
                 const attractionId = urlParams.get('id');
 
@@ -34,16 +41,78 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                // 3. Load all attraction data
+                // 4. Load all attraction data
                 await this.loadAttractionData(attractionId);
                 
-                // 4. Perform the initial page render
+                // 5. Perform the initial page render
                 this.renderPage();
 
             } catch (error) {
                 console.error("Initialization failed:", error);
                 this.renderError(error.message);
             }
+        }
+
+        getCategoryIcon(category, isCurrent = false) {
+            const icons = {
+                '歷史建築': { icon: 'fa-landmark', color: '#8B4513' },
+                '歷史街區': { icon: 'fa-landmark', color: '#A0522D' },
+                '美食': { icon: 'fa-utensils', color: '#FFA500' },
+                '信仰': { icon: 'fa-place-of-worship', color: '#FFD700' },
+                '文化': { icon: 'fa-palette', color: '#800080' },
+                '體驗': { icon: 'fa-hand-paper', color: '#008080' },
+                '咖啡': { icon: 'fa-coffee', color: '#654321' }
+            };
+            const style = icons[category] || { icon: 'fa-map-marker-alt', color: '#708090' };
+            const scale = isCurrent ? 'scale(1.2)' : 'scale(1)';
+            const zIndex = isCurrent ? 1000 : 900;
+            
+            return L.divIcon({
+                className: 'custom-fa-icon',
+                html: `<div class="marker-icon-background" style="background-color: ${style.color}; transform: ${scale}; z-index: ${zIndex};"><i class="fa-solid ${style.icon}"></i></div>`,
+                iconSize: [40, 40],
+                iconAnchor: [20, 40]
+            });
+        }
+
+        initLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            if (!modal) return;
+
+            const closeBtn = modal.querySelector('.lightbox-close');
+            const prevBtn = modal.querySelector('.lightbox-prev');
+            const nextBtn = modal.querySelector('.lightbox-next');
+
+            closeBtn.addEventListener('click', () => this.closeLightbox());
+            prevBtn.addEventListener('click', () => this.showPrevImage());
+            nextBtn.addEventListener('click', () => this.showNextImage());
+            
+            // Close on overlay click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    this.closeLightbox();
+                }
+            });
+        }
+
+        initBackToTopButton() {
+            const btn = document.getElementById('back-to-top-btn');
+            if (!btn) return;
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    btn.classList.add('visible');
+                } else {
+                    btn.classList.remove('visible');
+                }
+            }, { passive: true });
+
+            btn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
         }
 
         initLangSelector() {
@@ -126,26 +195,106 @@ document.addEventListener('DOMContentLoaded', () => {
             this.renderGallery();
             this.renderPanorama();
             this.renderNearbyAttractions();
+            this.renderDetailMap();
+        }
+
+        renderDetailMap() {
+            const mapContainer = document.getElementById('detail-map');
+            if (!mapContainer || !this.currentAttraction.coordinates) return;
+
+            if (this.detailMap) {
+                this.detailMap.remove();
+            }
+
+            const currentCoords = [this.currentAttraction.coordinates.lat, this.currentAttraction.coordinates.lon];
+            this.detailMap = L.map('detail-map').setView(currentCoords, 15);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 19
+            }).addTo(this.detailMap);
+
+            // Add marker for the current attraction
+            const currentIcon = this.getCategoryIcon(this.currentAttraction.category['zh-TW'], true);
+            L.marker(currentCoords, { icon: currentIcon }).addTo(this.detailMap)
+                .bindPopup(`<b>${this.currentAttraction.name[window.I18n.currentLang]}</b>`)
+                .openPopup();
+
+            // Add markers for nearby attractions
+            const nearbyAttractions = this.attractions
+                .filter(a => a.id !== this.currentAttraction.id && a.coordinates && !a.coordinates.placeholder)
+                .sort((a, b) => this.getDistance(this.currentAttraction.coordinates, a.coordinates) - this.getDistance(this.currentAttraction.coordinates, b.coordinates))
+                .slice(0, 3);
+                
+            nearbyAttractions.forEach(attraction => {
+                const icon = this.getCategoryIcon(attraction.category['zh-TW']);
+                L.marker([attraction.coordinates.lat, attraction.coordinates.lon], { icon: icon })
+                    .addTo(this.detailMap)
+                    .bindPopup(`<b>${attraction.name[window.I18n.currentLang]}</b>`);
+            });
         }
 
         renderGallery() {
             const attraction = this.currentAttraction;
-            const imageGallery = document.getElementById('image-gallery'); // Targeting the nested div for images
+            const imageGallery = document.getElementById('image-gallery');
+            if (!imageGallery) return;
 
-            if (imageGallery && attraction.gallery_images && attraction.gallery_images.length > 0) {
-                imageGallery.innerHTML = '';
+            this.galleryImages = []; // Reset for re-renders
+            imageGallery.innerHTML = '';
+
+            if (attraction.gallery_images && attraction.gallery_images.length > 0) {
                 const fragment = document.createDocumentFragment();
 
-                attraction.gallery_images.forEach(imageName => {
+                attraction.gallery_images.forEach((imageName, index) => {
+                    const imageUrl = `../images/${attraction.folder}/${imageName}`;
+                    this.galleryImages.push(imageUrl);
+
                     const img = document.createElement('img');
-                    img.src = `../images/${attraction.folder}/${imageName}`;
-                    img.alt = `${attraction.name[window.I18n.currentLang]} gallery image`;
+                    img.src = imageUrl;
+                    img.alt = `${attraction.name[window.I18n.currentLang]} gallery image ${index + 1}`;
                     img.loading = 'lazy';
+                    img.addEventListener('click', () => this.openLightbox(index));
                     fragment.appendChild(img);
                 });
 
                 imageGallery.appendChild(fragment);
             }
+        }
+
+        openLightbox(index) {
+            const modal = document.getElementById('lightbox-modal');
+            if (!modal || this.galleryImages.length === 0) return;
+
+            this.currentLightboxIndex = index;
+            modal.classList.add('visible');
+            this.updateLightboxImage();
+        }
+
+        closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            if (modal) {
+                modal.classList.remove('visible');
+            }
+        }
+
+        showNextImage() {
+            this.currentLightboxIndex = (this.currentLightboxIndex + 1) % this.galleryImages.length;
+            this.updateLightboxImage();
+        }
+
+        showPrevImage() {
+            this.currentLightboxIndex = (this.currentLightboxIndex - 1 + this.galleryImages.length) % this.galleryImages.length;
+            this.updateLightboxImage();
+        }
+
+        updateLightboxImage() {
+            const imageEl = document.getElementById('lightbox-image');
+            const captionEl = document.getElementById('lightbox-caption');
+            if (!imageEl || !captionEl) return;
+
+            const newSrc = this.galleryImages[this.currentLightboxIndex];
+            imageEl.src = newSrc;
+            captionEl.textContent = `${this.currentLightboxIndex + 1} / ${this.galleryImages.length}`;
         }
 
         renderPanorama() {

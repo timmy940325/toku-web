@@ -69,6 +69,7 @@
                     <div id="detail-meta" class="detail-meta">
                         <!-- Meta info like address and hours will be injected here -->
                     </div>
+                    <div id="detail-map" class="detail-map"></div>
                 </div>
 
                 <div id="spot-story-section" class="spot-story-section" style="display: none;">
@@ -103,5 +104,17 @@
         <p data-i18n="footer_text">&copy; 2025 Tuku GO. All Rights Reserved. A professional website designed for Tuku.</p>
     </footer>
 
-</body>
-</html>
+    <!-- Lightbox Modal Structure -->
+    <div id="lightbox-modal" class="lightbox-modal">
+        <span class="lightbox-close">&times;</span>
+        <div class="lightbox-content">
+            <a class="lightbox-prev">&#10094;</a>
+            <img id="lightbox-image" src="" alt="Enlarged attraction image">
+            <a class="lightbox-next">&#10095;</a>
+        </div>
+        <div id="lightbox-caption" class="lightbox-caption"></div>
+    </div>
+
+    <button id="back-to-top-btn" title="Go to top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>

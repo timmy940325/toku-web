@@ -27,6 +27,7 @@ function startApp() {
                 this.initSmoothScroll();
                 this.initMobileNavigation();
                 this.initHeaderScrollEffect();
+                this.initBackToTopButton();
 
                 // 2. Load core data (translations and attractions)
                 await window.I18n.init();
@@ -60,6 +61,26 @@ function startApp() {
             this.renderMapFilters();
             this.renderAttractionCards();
             this.filterMarkers('All'); 
+        }
+
+        initBackToTopButton() {
+            const btn = document.getElementById('back-to-top-btn');
+            if (!btn) return;
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    btn.classList.add('visible');
+                } else {
+                    btn.classList.remove('visible');
+                }
+            }, { passive: true });
+
+            btn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
         }
         
         getCategoryIcon(category) {

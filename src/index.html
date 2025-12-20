@@ -71,39 +71,62 @@
                                                 </div>
                                                 <div class="hero-scroll-down">
                                                     <a href="#story"><span></span></a>
-                                                </div>
+                                                                </div>
+                                                            </section>
+                                                    
+                                                            <section id="story" class="story-section fade-in-element">
+                                                                <div class="story-content">
+                                                                    <h2 class="section-title" data-i18n="story_title">The Story of Tuku</h2>
+                                                                    <p data-i18n="story_content">Tuku is more than just a place on a map. It's a town woven from threads of history, culture, and the unforgettable aroma of sesame oil. From bustling markets to serene temples, every corner holds a story. Tuku GO is your personal guide to unlocking these treasures. We invite you to wander, to taste, and to discover the living history of this remarkable town.</p>
+                                                                </div>
+                                                            </section>
+                                                    
+                                                            <section id="map-container" class="map-section fade-in-element">
+                                                                <h2 class="section-title" data-i18n="map_title">Interactive Tour Map</h2>
+                                                                <div id="map-filters" class="map-filters">
+                                                                    <!-- Filter buttons will be dynamically injected here -->
+                                                                </div>                                                <div id="map"></div>
                                             </section>
                                     
-                                            <section id="story" class="story-section">
-                                                <div class="story-content">
-                                                    <h2 class="section-title" data-i18n="story_title">The Story of Tuku</h2>
-                                                    <p data-i18n="story_content">Tuku is more than just a place on a map. It's a town woven from threads of history, culture, and the unforgettable aroma of sesame oil. From bustling markets to serene temples, every corner holds a story. Tuku GO is your personal guide to unlocking these treasures. We invite you to wander, to taste, and to discover the living history of this remarkable town.</p>
-                                                </div>
-                                            </section>
-                                    
-                                            <section id="map-container" class="map-section">
-                                                <h2 class="section-title" data-i18n="map_title">Interactive Tour Map</h2>
-                                                <div id="map-filters" class="map-filters">
-                                                    <!-- Filter buttons will be dynamically injected here -->
-                                                </div>
-                                                <div id="map"></div>
-                                            </section>
-                                    
-                                            <section id="attractions" class="attraction-section">
-                                                <h2 class="section-title" data-i18n="attractions_title">Featured Attractions</h2>
-                                                <div id="attraction-grid" class="attraction-grid">
-                                                    <!-- Attraction cards will be dynamically injected here by script.js -->
-                                                </div>
-                                            </section>
-                                        </main>
-                                    
-                                        <footer class="main-footer">
-                                            <p data-i18n="footer_text">&copy; 2025 Tuku GO. All Rights Reserved. A professional website designed for Tuku.</p>
-                                        </footer>
-                                        
-                                        <script>
-                                            startApp();
-                                        </script>
+                                                        <section id="attractions" class="attraction-section">
+                                                            <h2 class="section-title" data-i18n="attractions_title">Featured Attractions</h2>
+                                                            <div id="attraction-grid" class="attraction-grid">
+                                                                <!-- Attraction cards will be dynamically injected here by script.js -->
+                                                            </div>
+                                                        </section>
+                                            
+                                                        <section id="transportation" class="transportation-section">
+                                                            <h2 class="section-title" data-i18n="transportation_title">如何前往土庫</h2>
+                                                            <div class="transport-options">
+                                                                <div class="transport-option fade-in-element">
+                                                                    <i class="fas fa-train-subway"></i>
+                                                                    <h3 data-i18n="transport_hsr_title">搭乘高鐵 (HSR)</h3>
+                                                                    <p data-i18n="transport_hsr_desc">搭乘高鐵至「雲林站」。出站後，轉乘計程車或租車，約 20-25 分鐘即可抵達土庫鎮中心。</p>
+                                                                </div>
+                                                                <div class="transport-option fade-in-element">
+                                                                    <i class="fas fa-train"></i>
+                                                                    <h3 data-i18n="transport_tra_title">搭乘火車 (TRA)</h3>
+                                                                    <p data-i18n="transport_tra_desc">搭乘台鐵至「斗南站」或「斗六站」。出站後，可轉乘台西客運或計程車前往土庫，車程約 20-30 分鐘。</p>
+                                                                </div>
+                                                                <div class="transport-option fade-in-element">
+                                                                    <i class="fas fa-car"></i>
+                                                                    <h3 data-i18n="transport_car_title">自行開車</h3>
+                                                                    <p data-i18n="transport_car_desc">經由國道一號，下「虎尾交流道」或「斗南交流道」，沿指標行駛約 15-20 分鐘即可抵達土庫。鎮內設有多處停車場，方便停車。</p>
+                                                                </div>
+                                                            </div>
+                                                        </section>
+                                                    </main>
+                                                
+                                                    <footer class="main-footer">            <p data-i18n="footer_text">&copy; 2025 Tuku GO. All Rights Reserved. A professional website designed for Tuku.</p>
+        </footer>
+
+        <button id="back-to-top-btn" title="Go to top">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+        
+        <script>
+            startApp();
+        </script>
                                     
                                     </body>
                                 </html>
