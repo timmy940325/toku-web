@@ -149,10 +149,20 @@ body {
     justify-content: center;
     height: 100vh;
     padding-top: var(--header-height);
-    background: url('../images/土庫老街/IMG_20251130_144804.jpg') no-repeat center center/cover;
     position: relative;
     text-align: center;
-    overflow: hidden; /* Ensure pseudo-elements do not overflow */
+    overflow: hidden;
+
+    /* --- New Generative Texture Background --- */
+    background-color: #c8bba8; /* A warm, sophisticated base color */
+    --noise-color-1: hsla(0,0%,100%,.08);
+    --noise-color-2: hsla(0,0%,0%,.1);
+    background-image: 
+        radial-gradient(var(--noise-color-1) 1px, transparent 0),
+        radial-gradient(var(--noise-color-2) 1px, transparent 0);
+    background-size: 1.5px 1.5px;
+    -webkit-mask-image: radial-gradient(ellipse 150% 100% at 50% 0%,#000 70%,transparent);
+    mask-image: radial-gradient(ellipse 150% 100% at 50% 0%,#000 70%,transparent);
 }
 
 /* Softer, layered gradient overlay */
