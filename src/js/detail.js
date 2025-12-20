@@ -83,12 +83,27 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('detail-title').textContent = attraction.name[lang];
             document.getElementById('detail-description').textContent = attraction.description[lang];
 
+            const storySection = document.getElementById('spot-story-section');
+            const storyContent = document.getElementById('spot-story-content');
+            if (storySection && storyContent && attraction.story && attraction.story[lang]) {
+                storySection.style.display = 'block';
+                storyContent.innerHTML = attraction.story[lang];
+            } else if (storySection) {
+                storySection.style.display = 'none';
+            }
+
             const metaContainer = document.getElementById('detail-meta');
             if (metaContainer) {
                 metaContainer.innerHTML = `
                     <p><strong>${window.I18n.t('detail_meta_address')}:</strong> ${attraction.address[lang]}</p>
                     <p><strong>${window.I18n.t('detail_meta_hours')}:</strong> ${attraction.opening_hours[lang]}</p>
                 `;
+            }
+
+            // Ensure gallery-section is displayed if there are images
+            const gallerySection = document.getElementById('gallery-section');
+            if (gallerySection && attraction.gallery_images && attraction.gallery_images.length > 0) {
+                gallerySection.style.display = 'block';
             }
 
             this.renderGallery();
@@ -98,11 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         renderGallery() {
             const attraction = this.currentAttraction;
-            const galleryContainer = document.getElementById('gallery-container');
-            const imageGallery = document.getElementById('image-gallery');
+            const imageGallery = document.getElementById('image-gallery'); // Targeting the nested div for images
 
-            if (galleryContainer && imageGallery && attraction.gallery_images && attraction.gallery_images.length > 0) {
-                galleryContainer.style.display = 'block';
+            if (imageGallery && attraction.gallery_images && attraction.gallery_images.length > 0) {
                 imageGallery.innerHTML = '';
                 const fragment = document.createDocumentFragment();
 
@@ -124,17 +137,29 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!panoramaContainer) return;
 
             // Clear previous instance if it exists
-            if (panoramaContainer. pannellum) {
-                 panoramaContainer.pannellum.destroy();
-            }
-
-            if (typeof pannellum === 'undefined') {
-                console.error("Pannellum library not loaded.");
-                return;
-            }
+            // Pannellum viewer instance is attached to the DOM element directly
+            // No direct destroy method on the container, but recreating it works.
 
             if (attraction.panorama_image) {
                 panoramaContainer.style.display = 'block';
+                // Remove existing viewer to prevent duplicates and ensure clean re-render
+                const existingPanoramaDiv = document.getElementById('panorama');
+                if (existingPanoramaDiv) {
+                    existingPanoramaDiv.innerHTML = ''; // Clear content
+                } else {
+                    // Create if not exists, though it should from HTML
+                    const newPanoramaDiv = document.createElement('div');
+                    newPanoramaDiv.id = 'panorama';
+                    newPanoramaDiv.className = 'panorama-viewer';
+                    panoramaContainer.appendChild(newPanoramaDiv);
+                }
+
+                // Check if pannellum is defined globally, which it should be after CDN load
+                if (typeof pannellum === 'undefined') {
+                    console.error("Pannellum library not loaded.");
+                    return;
+                }
+
                 pannellum.viewer('panorama', {
                     "type": "equirectangular",
                     "panorama": `../images/${attraction.folder}/${attraction.panorama_image}`,
@@ -142,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     "autoRotate": -2
                 });
             } else {
-                 panoramaContainer.style.display = 'none';
+                panoramaContainer.style.display = 'none';
             }
         }
 

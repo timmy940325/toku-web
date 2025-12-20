@@ -5,15 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tuku Web - 景點詳情</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <!-- 引入 Pannellum 的 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
 </head>
 <body>
     <header class="main-header">
         <nav class="main-nav">
             <a href="../index.html" class="logo">Tuku GO</a>
             <ul>
-                <li><a href="../index.html#attractions">探索景點</a></li>
-                <li><a href="about.html">關於我們</a></li>
+                <li><a href="../index.html#attractions" data-i18n="nav_attractions">探索景點</a></li>
+                <li><a href="about.html" data-i18n="nav_about">關於我們</a></li>
             </ul>
+            <div class="lang-selector">
+                <button class="lang-button" data-lang="zh-TW">繁中</button>
+                <button class="lang-button" data-lang="en">EN</button>
+                <button class="lang-button" data-lang="ja">JA</button>
+                <button class="lang-button" data-lang="ko">KO</button>
+            </div>
             <button class="hamburger-menu">
                 <span></span>
                 <span></span>
@@ -21,31 +29,61 @@
             </button>
         </nav>
         <div class="mobile-nav">
-            <a href="../index.html#attractions">探索景點</a>
-            <a href="about.html">關於我們</a>
+            <a href="../index.html#attractions" data-i18n="nav_attractions">探索景點</a>
+            <a href="about.html" data-i18n="nav_about">關於我們</a>
         </div>
     </header>
 
-    <main>
-        <section id="spot-story">
-            <h2>景點故事</h2>
-            <!-- 請在此處放置景點的主視覺圖片，或者作為景點故事的開頭圖片。建議圖片尺寸與設計一致。 -->
-            <!-- 景點故事內容將放置於此 -->
-            <p>這是一個景點的故事。您可以在這裡閱讀有關該地點的詳細資訊。</p>
-        </section>
+    <div id="detail-main-content">
+        <header id="detail-hero" class="hero-section">
+            <div class="hero-content">
+                <h1 id="hero-title"></h1>
+            </div>
+        </header>
 
-        <section id="panorama-360">
-            <h2>360 全景</h2>
-            <!-- 請在此處嵌入 360 度全景照片或視訊。若使用 Pannellum.js，則程式碼會類似於其他景點頁面中的範例。 -->
-            <!-- 360 全景內容將放置於此 -->
-            <p>這裡將嵌入 360 度全景照片或視訊。</p>
-        </section>
-    </main>
+        <main class="page-container">
+            <section id="spot-info">
+                <h1 id="detail-title" class="section-title"></h1>
+                <p id="detail-description" class="lead-paragraph"></p>
+                <div id="detail-meta" class="meta-info"></div>
+            </section>
+
+            <section id="spot-story">
+                <h2 data-i18n="spot_story_title">景點故事</h2>
+                <div id="spot-story-content" class="story-content">
+                    <!-- 景點故事內容將放置於此 -->
+                </div>
+            </section>
+            
+            <section id="gallery-section" style="display: none;">
+                <h2 data-i18n="detail_gallery_title">照片集</h2>
+                <div id="gallery-container" class="image-gallery">
+                    <div id="image-gallery"></div>
+                </div>
+            </section>
+
+            <section id="panorama-container" style="display: none;">
+                <h2 data-i18n="panorama_title">360 全景</h2>
+                <div id="panorama" class="panorama-viewer"></div>
+            </section>
+
+            <section id="nearby-section" style="display: none;">
+                <h2 data-i18n="detail_nearby_title">附近景點</h2>
+                <div id="nearby-grid" class="attraction-grid">
+                    <!-- 附近景點卡片將放置於此 -->
+                </div>
+            </section>
+        </main>
+    </div>
 
     <footer>
         <p>&copy; 2025 Tuku Web</p>
     </footer>
 
+    <!-- 引入 Pannellum 的 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <script src="../js/i18n.js"></script>
     <script src="../js/script.js"></script>
+    <script src="../js/detail.js"></script>
 </body>
 </html>
