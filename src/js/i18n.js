@@ -19,12 +19,7 @@ const I18n = {
         this.currentLang = this.getLanguage();
         await this.loadTranslations(this.currentLang);
         this.initLangSelector();
-
-        // Perform initial page update after i18n is ready
-        if (typeof window.updatePageLanguage === 'function') {
-            window.updatePageLanguage();
-        }
-
+        // The initial page render should be triggered by the main script AFTER i18n is ready.
         // After initial load and translation, make content visible
         document.body.classList.add('i18n-loaded');
     },
@@ -93,11 +88,7 @@ const I18n = {
         this.currentLang = lang;
         localStorage.setItem('tuku_go_lang', lang);
         await this.loadTranslations(lang);
-        
-        // Call the global update function
-        if (typeof window.updatePageLanguage === 'function') {
-            window.updatePageLanguage();
-        }
+        // The calling script is now responsible for triggering the re-render.
     },
 
     translatePage() {

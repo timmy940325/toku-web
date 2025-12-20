@@ -18,37 +18,51 @@ document.addEventListener('DOMContentLoaded', () => {
             this.markers = {}; // To store marker instances
             this.markerClusterGroup = null; // For marker clustering
             this.categoryLayers = {}; // To hold layers for filtering
-            this.activeFilters = new Set(); // To track active filters
             
-            // Define the global update function and bind it to the class instance
-            window.updatePageLanguage = this.updateLanguage.bind(this);
             this.init();
         }
 
         async init() {
             try {
-                await window.I18n.init();
+                // 1. Set up basic UI stuff that doesn't depend on data
                 this.initSmoothScroll();
                 this.initMobileNavigation();
                 this.initHeaderScrollEffect();
-                
+
+                // 2. Load core data (translations and attractions)
+                await window.I18n.init();
+                this.initLangSelector(); // Init selector after i18n is ready
                 await this.loadAttractions();
                 
+                // 3. Now that we have data, build the map
                 this.initMap();
                 this.createMarkers();
+                
+                // 4. Render UI components that depend on data
                 this.renderMapFilters();
-                this.filterMarkers('All'); // Show all markers initially
+                this.renderAttractionCards();
                 
+                // 5. Perform the initial filtering and translation render
+                this.filterMarkers('All');
+                window.I18n.translatePage();
+
+                // 6. Set up animations for dynamically added content
                 this.initScrollAnimations();
-                
-                // Perform initial translation
-                this.updateLanguage();
 
             } catch (error) {
                 console.error("Website initialization failed:", error);
             }
         }
 
+        // Re-renders content when language changes
+        updateLanguage() {
+            window.I18n.translatePage();
+            this.createMarkers();
+            this.renderMapFilters();
+            this.renderAttractionCards();
+            this.filterMarkers('All'); 
+        }
+        
         getCategoryIcon(category) {
             const icons = {
                 '歷史建築': { icon: 'fa-landmark', color: '#8B4513' },
@@ -81,15 +95,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         }
-        
-        // This function will be called by the i18n module
-        updateLanguage() {
-            window.I18n.translatePage();
-            this.renderAttractionCards();
-            this.createMarkers(); // Re-create markers for new popup language
-            this.renderMapFilters(); // Re-render filters for new language
-            this.filterMarkers('All'); // Re-apply all filter
-        }
 
         async loadAttractions() {
             try {
@@ -113,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             if (this.map) {
-                this.map.remove(); // Remove and re-initialize map on language change etc.
+                this.map.remove();
             }
             const mapCenter = [23.6766, 120.3906];
             this.map = L.map('map').setView(mapCenter, 15);
@@ -129,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         createMarkers() {
             if (!this.map) return;
             
-            // Clear existing layers
+            this.markerClusterGroup.clearLayers();
             Object.values(this.categoryLayers).forEach(layer => layer.clearLayers());
             this.markers = {};
 
@@ -166,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 const button = document.createElement('button');
                 button.className = 'map-filter-button';
                 button.dataset.filter = category;
-                // For 'All', use a generic i18n key, otherwise use the category name
                 const buttonText = category === 'All' ? window.I18n.t('filter_all') : this.attractions.find(a => a.category['zh-TW'] === category).category[window.I18n.currentLang];
                 button.textContent = buttonText;
                 fragment.appendChild(button);
@@ -183,6 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         filterMarkers(filterKey) {
+            if (!this.markerClusterGroup) return; 
             this.markerClusterGroup.clearLayers();
 
             if (filterKey === 'All') {
@@ -195,7 +200,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            // Update active state for buttons
             document.querySelectorAll('#map-filters .map-filter-button').forEach(button => {
                 button.classList.toggle('active', button.dataset.filter === filterKey);
             });
@@ -213,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const detailUrl = `pages/detail.html?id=${attraction.id}`;
                 const imageUrl = `images/${attraction.folder}/${attraction.card_image}`;
 
-                const card = document.createElement('div'); // Changed from 'a' to 'div'
+                const card = document.createElement('div');
                 card.className = 'card fade-in-element';
 
                 card.innerHTML = `
@@ -235,18 +239,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
             grid.appendChild(fragment);
 
-            // Add event listeners for the new map buttons
             grid.querySelectorAll('.map-button').forEach(button => {
                 button.addEventListener('click', (e) => {
                     const attractionId = e.currentTarget.getAttribute('data-id');
                     this.panToMarker(attractionId);
-                    // Scroll to the map
                     document.getElementById('map-container').scrollIntoView({ behavior: 'smooth' });
                 });
             });
 
-            // Re-initialize scroll animations for new cards
             this.initScrollAnimations();
+        }
+
+        initLangSelector() {
+            const langSelector = document.querySelector('.language-selector');
+            if (!langSelector) return;
+    
+            langSelector.querySelectorAll('.lang-dropdown a').forEach(link => {
+                link.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    const lang = e.target.getAttribute('data-lang');
+                    if (lang && lang !== window.I18n.currentLang) {
+                        await window.I18n.setLanguage(lang);
+                        this.updateLanguage();
+                    }
+                });
+            });
         }
 
         initSmoothScroll() {

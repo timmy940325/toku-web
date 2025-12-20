@@ -16,15 +16,16 @@ document.addEventListener('DOMContentLoaded', () => {
         constructor() {
             this.attractions = [];
             this.currentAttraction = null;
-            // Define the global update function and bind it to the class instance
-            window.updatePageLanguage = this.renderPage.bind(this);
             this.init();
         }
 
         async init() {
             try {
+                // 1. Load translations first
                 await window.I18n.init();
+                this.initLangSelector();
 
+                // 2. Get attraction ID from URL
                 const urlParams = new URLSearchParams(window.location.search);
                 const attractionId = urlParams.get('id');
 
@@ -33,15 +34,32 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
+                // 3. Load all attraction data
                 await this.loadAttractionData(attractionId);
                 
-                // Perform initial render
+                // 4. Perform the initial page render
                 this.renderPage();
 
             } catch (error) {
                 console.error("Initialization failed:", error);
                 this.renderError(error.message);
             }
+        }
+
+        initLangSelector() {
+            const langSelector = document.querySelector('.language-selector');
+            if (!langSelector) return;
+    
+            langSelector.querySelectorAll('.lang-dropdown a').forEach(link => {
+                link.addEventListener('click', async (e) => {
+                    e.preventDefault();
+                    const lang = e.target.getAttribute('data-lang');
+                    if (lang && lang !== window.I18n.currentLang) {
+                        await window.I18n.setLanguage(lang);
+                        this.renderPage(); // Re-render page with new language
+                    }
+                });
+            });
         }
 
         async loadAttractionData(attractionId) {
@@ -63,8 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         renderPage() {
-            // This function is now the central point for all rendering on this page
-            if (!this.currentAttraction) return; // Don't render if data isn't loaded yet
+            if (!this.currentAttraction) return;
 
             window.I18n.translatePage();
             const lang = window.I18n.currentLang;
@@ -99,12 +116,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <p><strong>${window.I18n.t('detail_meta_hours')}:</strong> ${attraction.opening_hours[lang]}</p>
                 `;
             }
-
-            // Ensure gallery-section is displayed if there are images
-            const gallerySection = document.getElementById('gallery-section');
-            if (gallerySection && attraction.gallery_images && attraction.gallery_images.length > 0) {
-                gallerySection.style.display = 'block';
+            
+            const galleryContainer = document.getElementById('gallery-container');
+            if (galleryContainer && attraction.gallery_images && attraction.gallery_images.length > 0) {
+                 galleryContainer.style.display = 'block';
             }
+
 
             this.renderGallery();
             this.renderPanorama();
