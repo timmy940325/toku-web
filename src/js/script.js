@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         constructor() {
             this.attractions = [];
             this.map = null;
+            this.markers = {}; // To store marker instances
             // Define the global update function and bind it to the class instance
             window.updatePageLanguage = this.updateLanguage.bind(this);
             this.init();
@@ -37,6 +38,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
             } catch (error) {
                 console.error("Website initialization failed:", error);
+            }
+        }
+
+        getCategoryStyle(category) {
+            const styles = {
+                '歷史建築': { color: '#8B4513' }, // SaddleBrown
+                '歷史街區': { color: '#A0522D' }, // Sienna
+                '美食': { color: '#FFA500' },     // Orange
+                '信仰': { color: '#FFD700' },     // Gold
+                '文化': { color: '#800080' },     // Purple
+                '體驗': { color: '#008080' },     // Teal
+                '咖啡': { color: '#654321' }      // DarkBrown (custom)
+            };
+            return styles[category] || { color: '#708090' }; // Default to SlateGray
+        }
+
+        panToMarker(attractionId) {
+            const marker = this.markers[attractionId];
+            if (marker) {
+                this.map.flyTo(marker.getLatLng(), 17, {
+                    animate: true,
+                    duration: 1.5
+                });
+                marker.openPopup();
             }
         }
         
@@ -85,17 +110,27 @@ document.addEventListener('DOMContentLoaded', () => {
         updateMapPopups() {
             if (!this.map) return;
             
-            this.map.eachLayer(layer => {
-                if (layer instanceof L.Marker) {
-                    this.map.removeLayer(layer);
-                }
-            });
+            // Clear existing markers from the map
+            Object.values(this.markers).forEach(marker => marker.removeFrom(this.map));
+            this.markers = {};
+
+            const lang = window.I18n.currentLang;
 
             this.attractions.forEach(attraction => {
                 if (attraction.coordinates && attraction.coordinates.lat) {
-                    const marker = L.marker([attraction.coordinates.lat, attraction.coordinates.lon]).addTo(this.map);
-                    const popupContent = `<b>${attraction.name[window.I18n.currentLang]}</b><br><a href="pages/detail.html?id=${attraction.id}">${window.I18n.t('card_button')}</a>`;
+                    const style = this.getCategoryStyle(attraction.category['zh-TW']); // Use zh-TW for consistent key
+                    const icon = L.divIcon({
+                        className: 'custom-div-icon',
+                        html: `<div style="background-color: ${style.color};" class="marker-pin"></div>`,
+                        iconSize: [30, 42],
+                        iconAnchor: [15, 42]
+                    });
+
+                    const marker = L.marker([attraction.coordinates.lat, attraction.coordinates.lon], { icon: icon }).addTo(this.map);
+                    const popupContent = `<b>${attraction.name[lang]}</b><br><a href="pages/detail.html?id=${attraction.id}">${window.I18n.t('card_button')}</a>`;
                     marker.bindPopup(popupContent);
+
+                    this.markers[attraction.id] = marker;
                 }
             });
         }
@@ -112,8 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const detailUrl = `pages/detail.html?id=${attraction.id}`;
                 const imageUrl = `images/${attraction.folder}/${attraction.card_image}`;
 
-                const card = document.createElement('a');
-                card.href = detailUrl;
+                const card = document.createElement('div'); // Changed from 'a' to 'div'
                 card.className = 'card fade-in-element';
 
                 card.innerHTML = `
@@ -124,13 +158,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="card-content">
                         <h3 class="card-title">${attraction.name[lang]}</h3>
                         <p class="card-description">${attraction.description[lang]}</p>
-                        <span class="card-button">${window.I18n.t('card_button')}</span>
+                        <div class="card-actions">
+                            <button class="card-button map-button" data-id="${attraction.id}">${window.I18n.t('map_button_text')}</button>
+                            <a href="${detailUrl}" class="card-button learn-more-button">${window.I18n.t('card_button')}</a>
+                        </div>
                     </div>
                 `;
                 fragment.appendChild(card);
             });
 
             grid.appendChild(fragment);
+
+            // Add event listeners for the new map buttons
+            grid.querySelectorAll('.map-button').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const attractionId = e.currentTarget.getAttribute('data-id');
+                    this.panToMarker(attractionId);
+                    // Scroll to the map
+                    document.getElementById('map-container').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
             // Re-initialize scroll animations for new cards
             this.initScrollAnimations();
         }

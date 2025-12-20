@@ -324,7 +324,27 @@ body {
     color: var(--text-secondary);
 }
 
-.card-button {
+.card-actions {
+    display: flex;
+    gap: var(--spacing-m);
+    margin-top: auto; /* Pushes actions to the bottom */
+}
+
+.card-button.map-button {
+    background-color: var(--primary-color);
+    color: var(--surface-color);
+    padding: var(--spacing-s) var(--spacing-m);
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: background-color var(--transition-fast);
+}
+
+.card-button.map-button:hover {
+    background-color: var(--secondary-color);
+}
+
+.card-button.learn-more-button {
     align-self: flex-start;
     background-color: transparent;
     color: var(--secondary-color);
@@ -337,7 +357,7 @@ body {
 }
 
 /* Card button underline animation */
-.card-button::after {
+.card-button.learn-more-button::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -350,11 +370,11 @@ body {
     transition: transform var(--transition-smooth);
 }
 
-.card:hover .card-button {
+.card:hover .card-button.learn-more-button {
     color: var(--primary-color);
 }
 
-.card:hover .card-button::after {
+.card:hover .card-button.learn-more-button::after {
     transform: scaleX(1);
 }
 
@@ -390,6 +410,31 @@ body {
     border-radius: var(--border-radius);
     box-shadow: 0 10px 40px rgba(0,0,0,0.1);
 }
+
+/* Custom Map Marker Styles */
+.custom-div-icon .marker-pin {
+    width: 30px;
+    height: 30px;
+    border-radius: 50% 50% 50% 0;
+    position: absolute;
+    transform: rotate(-45deg);
+    left: 50%;
+    top: 50%;
+    margin: -15px 0 0 -15px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    border: 2px solid #fff;
+}
+
+.custom-div-icon .marker-pin::after {
+    content: '';
+    width: 14px;
+    height: 14px;
+    margin: 8px 0 0 8px;
+    background: #fff;
+    position: absolute;
+    border-radius: 50%;
+}
+
 
 /* --- Card Category Badge --- */
 .card-category {
