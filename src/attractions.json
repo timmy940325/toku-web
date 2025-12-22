@@ -441,7 +441,7 @@
   },
   {
     "id": "koka-kuka-coffee",
-    "folder": "KOKA庫咖咖啡",
+    "folder": "koka-coffee",
     "name": {
       "zh-TW": "KOKA庫咖咖啡",
       "en": "KOKA Kuka Coffee",
@@ -481,6 +481,6 @@
     },
     "card_image": "IMG_20251130_150217.jpg",
     "gallery_images": ["IMG_20251130_150217.jpg", "IMG_20251130_150300.jpg"],
-    "panorama_image": "長條圖.jpg"
+    "panorama_image": "panorama.jpg"
   }
 ]
