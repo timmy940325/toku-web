@@ -22,5 +22,12 @@
     <!-- Custom Page Initialization JS -->
     <script src="/toku-web/js/koka_pano_init.js"></script>
 
+    <!--
+        Manual override for the global 'i18n-loaded' style.
+        The main stylesheet hides the body by default, expecting i18n.js to make it visible.
+        This standalone page doesn't use i18n, so we force it to be visible.
+    -->
+    <script>document.body.classList.add('i18n-loaded');</script>
+
 </body>
 </html>
