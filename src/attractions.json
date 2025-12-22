@@ -1,7 +1,7 @@
 [
   {
     "id": "tuku-shokuekijo",
-    "folder": "土庫庄役場",
+    "folder": "tuku-shokuekijo",
     "name": {
       "zh-TW": "土庫庄役場",
       "en": "Tuku Shokuekijo (Former Township Office)",
@@ -45,7 +45,7 @@
   },
   {
     "id": "tuku-old-street",
-    "folder": "土庫老街",
+    "folder": "tuku-old-street",
     "name": {
       "zh-TW": "土庫老街",
       "en": "Tuku Old Street",
@@ -89,7 +89,7 @@
   },
   {
     "id": "tuku-story-house",
-    "folder": "土庫故事屋",
+    "folder": "tuku-story-house",
     "name": {
       "zh-TW": "土庫故事屋",
       "en": "Tuku Story House",
@@ -133,7 +133,7 @@
   },
   {
     "id": "tuku-first-market",
-    "folder": "土庫第一市場",
+    "folder": "tuku-first-market",
     "name": {
       "zh-TW": "土庫第一市場",
       "en": "Tuku First Market",
@@ -177,7 +177,7 @@
   },
   {
     "id": "tuku-shuntian-temple",
-    "folder": "土庫順天宮",
+    "folder": "tuku-shuntian-temple",
     "name": {
       "zh-TW": "土庫順天宮",
       "en": "Tuku Shuntian Temple",
@@ -221,7 +221,7 @@
   },
   {
     "id": "qiushan-jiao-coffee",
-    "folder": "丘山角珈琲室",
+    "folder": "qiushan-jiao-coffee",
     "name": {
       "zh-TW": "丘山角珈琲室",
       "en": "Qiushan Jiao Coffee",
@@ -265,7 +265,7 @@
   },
   {
     "id": "gao-long-zhen-bakery",
-    "folder": "高隆珍餅舖",
+    "folder": "gao-long-zhen-bakery",
     "name": {
       "zh-TW": "高隆珍餅舖",
       "en": "Gao Long Zhen Bakery",
@@ -309,7 +309,7 @@
   },
   {
     "id": "shun-cheng-oil-factory",
-    "folder": "順成油廠",
+    "folder": "shun-cheng-oil-factory",
     "name": {
       "zh-TW": "順成油廠",
       "en": "Shun Cheng Oil Factory",
@@ -353,7 +353,7 @@
   },
   {
     "id": "yuan-shun-oil-factory",
-    "folder": "源順芝麻觀光油廠",
+    "folder": "yuan-shun-oil-factory",
     "name": {
       "zh-TW": "源順芝麻觀光油廠",
       "en": "Yuan Shun Sesame Oil Tourist Factory",
@@ -397,7 +397,7 @@
   },
   {
     "id": "wande-hospital",
-    "folder": "萬得醫院",
+    "folder": "wande-hospital",
     "name": {
       "zh-TW": "萬得醫院",
       "en": "Wande Hospital",
