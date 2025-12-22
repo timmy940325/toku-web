@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Viewer settings
         "title": "KOKA庫咖咖啡",
         "author": "Toku Web",
-        "type": "equirectangular",
+        "type": "cylindrical",
         
         // Use absolute path for reliability. 
         // The /toku-web/ part corresponds to the GitHub repository name.
