@@ -143,10 +143,7 @@ body {
 }
 
 /* --- Hero Section Redesign --- */
-@keyframes move-particles {
-  0% { background-position: 0 0; }
-  100% { background-position: -1000px 500px; }
-}
+
 
 .hero {
     display: flex;
@@ -158,19 +155,18 @@ body {
     text-align: center;
     overflow: hidden;
 
-    /* --- New "Dark Premium" Generative Background --- */
-    background-color: #1a1a1d; /* Deep charcoal */
-    background-image:
-        radial-gradient(hsla(0,0%,100%,.05) .5px, transparent 0),
-        radial-gradient(hsla(0,0%,100%,.1) .5px, transparent 0);
-    background-size: 500px 500px, 300px 300px;
-    background-position: 0 0, 40px 60px;
-    animation: move-particles 90s linear infinite;
+    background: url('../images/tuku-old-street/IMG_20251130_144804.jpg') no-repeat center center/cover;
 }
 
 /* Softer, layered gradient overlay - Disabled for dark theme */
 .hero::after {
-    display: none;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(50,20,10,0.6) 0%, rgba(50,20,10,0.2) 50%, transparent 100%);
 }
 
 .hero-content {
@@ -185,16 +181,13 @@ body {
     font-size: clamp(3rem, 10vw, 6rem); /* Responsive font size */
     letter-spacing: 1.5px;
     font-weight: 700;
-    color: var(--accent-color); /* Changed to elegant gold */
-    text-shadow: 0 0 20px rgba(232, 180, 86, 0.3), 0 0 8px rgba(232, 180, 86, 0.2);
 }
 
 .hero-subtitle {
     font-size: clamp(1.2rem, 4vw, 1.8rem);
     font-weight: 400;
     margin-top: var(--spacing-m);
-    color: rgba(240, 240, 240, 0.8);
-    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    color: rgba(240, 240, 240, 0.9);
 }
 
 /* Main Call-to-Action (CTA) Button */
