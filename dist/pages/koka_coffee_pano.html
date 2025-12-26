@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOKA庫咖咖啡 360 全景</title>
+
+    <!-- Pannellum Library CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+    
+    <!-- Custom Page CSS -->
+    <link rel="stylesheet" href="/toku-web/css/koka_pano_style.css">
+</head>
+<body>
+
+    <!-- The container for the 360 panorama -->
+    <div id="panorama"></div>
+
+    <!-- Pannellum Library JS -->
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+
+    <!-- Custom Page Initialization JS (with cache-busting) -->
+    <script src="/toku-web/js/koka_pano_init.js?v=3"></script>
+
+    <!--
+        Manual override for the global 'i18n-loaded' style.
+        The main stylesheet hides the body by default, expecting i18n.js to make it visible.
+        This standalone page doesn't use i18n, so we force it to be visible.
+    -->
+    <script>document.body.classList.add('i18n-loaded');</script>
+
+</body>
+</html>

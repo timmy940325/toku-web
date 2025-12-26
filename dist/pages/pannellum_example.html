@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pannellum 360 全景範例</title>
+    <!-- 引入 Pannellum 的 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden; /* 避免出現滾動條 */
+        }
+        #panorama {
+            width: 100%;
+            height: 100%;
+        }
+        .pnlm-load-box {
+             border-color: rgba(255, 255, 255, 0.8) !important;
+        }
+        .pnlm-load-indicator{
+            border-color: rgba(255, 255, 255, 0.8) rgba(255, 255, 255, 0.8) rgba(255, 255, 255, 0.8) transparent !important;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 這是將要顯示 360 全景的容器 -->
+    <div id="panorama"></div>
+
+    <!-- 引入 Pannellum 的 JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+
+    <script>
+        // 初始化 Pannellum
+        pannellum.viewer('panorama', {
+            "type": "equirectangular",
+            // 360 全景圖片的 URL
+            "panorama": "https://pannellum.org/images/cerro-toco-0.jpg",
+            
+            // 自動載入全景。這是預設行為，但明確寫出有助於理解。
+            "autoLoad": true,
+            
+            // 自動旋轉。數字為正值時逆時針旋轉，負值時順時針，單位是 度/秒。
+            "autoRotate": -2
+        });
+    </script>
+
+</body>
+</html>

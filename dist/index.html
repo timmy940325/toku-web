@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="探索雲林土庫的歷史景點、美食與文化。Tuku GO 提供您最完整的土庫旅遊資訊、地圖與行程建議，帶您深度體驗這座小鎮的獨特魅力。">
+        <title>Tuku GO 土庫漫遊 - A Professional Travel Guide</title>
+        
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+        
+        <!-- CSS -->
+                <link rel="stylesheet" href="css/styles.css">
+                <link rel="stylesheet" href="css/leaflet.css"/>
+                        <!-- Font Awesome for icons -->
+                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+                                <!-- Leaflet.markercluster for clustering -->
+                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css" />
+                                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css" />
+                            
+                                <!-- Scripts -->
+                                        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
+                                        <script src="js/i18n.js"></script>
+                                        <script src="js/script.js"></script>
+                                    </head>
+                                    <body>
+                                    
+                                        <header class="main-header">
+                                            <nav class="main-nav">
+                                                <a href="index.html" class="logo">Tuku GO</a>
+                                                <ul>
+                                                    <li><a href="#story" data-i18n="nav_story">The Story</a></li>
+                                                    <li><a href="#map-container" data-i18n="nav_map">Tour Map</a></li>
+                                                    <li><a href="#attractions" data-i18n="nav_attractions">Attractions</a></li>
+                                                                    <li><a href="pages/about.html" data-i18n="nav_about">About Us</a></li>
+                                                                                    <li class="language-selector">
+                                                                                        <button class="lang-button" data-i18n="lang_button_text">
+                                                                                            <span class="icon">🌐</span>
+                                                                                            <span class="current-lang-text">Language</span>
+                                                                                        </button>
+                                                                                        <ul class="lang-dropdown">
+                                                                                            <li><a href="#" data-lang="zh-TW" data-i18n="lang_zh_TW">繁體中文</a></li>
+                                                                                            <li><a href="#" data-lang="en" data-i18n="lang_en">English</a></li>
+                                                                                            <li><a href="#" data-lang="ja" data-i18n="lang_ja">日本語</a></li>
+                                                                                            <li><a href="#" data-lang="ko" data-i18n="lang_ko">한국어</a></li>
+                                                                                        </ul>
+                                                                                    </li>
+                                                                                </ul>
+                                                                                <button class="hamburger-menu">                    <span></span>
+                                                    <span></span>
+                                                    <span></span>
+                                                </button>
+                                            </nav>
+                                            <div class="mobile-nav">
+                                                <a href="#story" data-i18n="nav_story">The Story</a>
+                                                <a href="#map-container" data-i18n="nav_map">Tour Map</a>
+                                                <a href="#attractions" data-i18n="nav_attractions">Attractions</a>
+                                                <a href="pages/about.html" data-i18n="nav_about">About Us</a>
+                                            </div>
+                                        </header>
+                                    
+                                        <main>
+                                            <section class="hero">
+                                                <div class="hero-content">
+                                                    <h1 class="hero-title" data-i18n="hero_title">Tuku GO 土庫漫遊</h1>
+                                                    <p class="hero-subtitle" data-i18n="hero_subtitle">Discover the Hidden Charms and Stories of Tuku, Yunlin</p>
+                                                    <a href="#story" class="cta-button" data-i18n="hero_button">Begin the Journey</a>
+                                                </div>
+                                                <div class="hero-scroll-down">
+                                                    <a href="#story"><span></span></a>
+                                                                </div>
+                                                            </section>
+                                                    
+                                                            <section id="story" class="story-section fade-in-element">
+                                                                <div class="story-content">
+                                                                    <h2 class="section-title" data-i18n="story_title">The Story of Tuku</h2>
+                                                                    <p data-i18n="story_content">Tuku is more than just a place on a map. It's a town woven from threads of history, culture, and the unforgettable aroma of sesame oil. From bustling markets to serene temples, every corner holds a story. Tuku GO is your personal guide to unlocking these treasures. We invite you to wander, to taste, and to discover the living history of this remarkable town.</p>
+                                                                </div>
+                                                            </section>
+                                                    
+                                                            <section id="map-container" class="map-section fade-in-element">
+                                                                <h2 class="section-title" data-i18n="map_title">Interactive Tour Map</h2>
+                                                                <div id="map-filters" class="map-filters">
+                                                                    <!-- Filter buttons will be dynamically injected here -->
+                                                                </div>                                                <div id="map"></div>
+                                            </section>
+                                    
+                                                        <section id="attractions" class="attraction-section">
+                                                            <h2 class="section-title" data-i18n="attractions_title">Featured Attractions</h2>
+                                                            <div id="attraction-grid" class="attraction-grid">
+                                                                <!-- Attraction cards will be dynamically injected here by script.js -->
+                                                            </div>
+                                                        </section>
+                                            
+                                                        <section id="transportation" class="transportation-section">
+                                                            <h2 class="section-title" data-i18n="transportation_title">如何前往土庫</h2>
+                                                            <div class="transport-options">
+                                                                <div class="transport-option fade-in-element">
+                                                                    <i class="fas fa-train-subway"></i>
+                                                                    <h3 data-i18n="transport_hsr_title">搭乘高鐵 (HSR)</h3>
+                                                                    <p data-i18n="transport_hsr_desc">搭乘高鐵至「雲林站」。出站後，轉乘計程車或租車，約 20-25 分鐘即可抵達土庫鎮中心。</p>
+                                                                </div>
+                                                                <div class="transport-option fade-in-element">
+                                                                    <i class="fas fa-train"></i>
+                                                                    <h3 data-i18n="transport_tra_title">搭乘火車 (TRA)</h3>
+                                                                    <p data-i18n="transport_tra_desc">搭乘台鐵至「斗南站」或「斗六站」。出站後，可轉乘台西客運或計程車前往土庫，車程約 20-30 分鐘。</p>
+                                                                </div>
+                                                                <div class="transport-option fade-in-element">
+                                                                    <i class="fas fa-car"></i>
+                                                                    <h3 data-i18n="transport_car_title">自行開車</h3>
+                                                                    <p data-i18n="transport_car_desc">經由國道一號，下「虎尾交流道」或「斗南交流道」，沿指標行駛約 15-20 分鐘即可抵達土庫。鎮內設有多處停車場，方便停車。</p>
+                                                                </div>
+                                                            </div>
+                                                        </section>
+                                                    </main>
+                                                
+                                                    <footer class="main-footer">            <p data-i18n="footer_text">&copy; 2025 Tuku GO. All Rights Reserved. A professional website designed for Tuku.</p>
+        </footer>
+
+        <button id="back-to-top-btn" title="Go to top">
+            <i class="fa-solid fa-arrow-up"></i>
+        </button>
+        
+        <script>
+            startApp();
+        </script>
+                                    
+                                    </body>
+                                </html>
