@@ -41,7 +41,7 @@
     },
     "card_image": "IMG_20251130_135317.jpg",
     "gallery_images": ["20251130_135814.jpg", "IMG_20251130_135317.jpg"],
-    "panorama_image": "長條圖1.jpg"
+    "stripImage": "土庫庄役場長條圖.jpg"
   },
   {
     "id": "tuku-old-street",
@@ -85,7 +85,7 @@
     },
     "card_image": "IMG_20251130_144804.jpg",
     "gallery_images": ["IMG_20251130_144804.jpg", "IMG_20251130_144854.jpg", "IMG_20251130_145325.jpg"],
-    "panorama_image": "長條圖1.jpg"
+    "stripImage": "土庫老街長條圖.jpg"
   },
   {
     "id": "tuku-story-house",
@@ -129,7 +129,7 @@
     },
     "card_image": "IMG_20251130_134022.jpg",
     "gallery_images": ["IMG_20251130_134022.jpg", "IMG_20251130_134329.jpg"],
-    "panorama_image": "長條圖.jpg"
+    "stripImage": "長條圖.jpg"
   },
   {
     "id": "tuku-first-market",
@@ -173,7 +173,7 @@
     },
     "card_image": "20251130_145420.jpg",
     "gallery_images": ["20251130_145420.jpg", "IMG_20251130_145203.jpg"],
-    "panorama_image": "長條圖.jpg"
+    "stripImage": "長條圖.jpg"
   },
   {
     "id": "tuku-shuntian-temple",
@@ -217,7 +217,7 @@
     },
     "card_image": "土庫順天宮.png",
     "gallery_images": ["土庫順天宮.png", "IMG_20251130_144952.jpg"],
-    "panorama_image": "長條圖1.jpg"
+    "stripImage": "長條圖1.jpg"
   },
   {
     "id": "qiushan-jiao-coffee",
@@ -261,7 +261,7 @@
     },
     "card_image": "IMG_20251130_153736.jpg",
     "gallery_images": ["20251130_153953.jpg", "IMG_20251130_153736.jpg", "IMG_20251130_153841.jpg"],
-    "panorama_image": "長條圖1.jpg"
+    "stripImage": "長條圖1.jpg"
   },
   {
     "id": "gao-long-zhen-bakery",
@@ -305,7 +305,7 @@
     },
     "card_image": "IMG_20251130_154625.jpg",
     "gallery_images": ["IMG_20251130_154523.jpg", "IMG_20251130_154625.jpg"],
-    "panorama_image": "長條圖.jpg"
+    "stripImage": "長條圖.jpg"
   },
   {
     "id": "shun-cheng-oil-factory",
@@ -349,7 +349,7 @@
     },
     "card_image": "IMG_20251130_152130.jpg",
     "gallery_images": ["IMG_20251130_152130.jpg"],
-    "panorama_image": "長條圖.jpg"
+    "stripImage": "長條圖.jpg"
   },
   {
     "id": "yuan-shun-oil-factory",
@@ -393,7 +393,7 @@
     },
     "card_image": "20251130_160552.jpg",
     "gallery_images": ["20251130_160552.jpg", "20251130_160647.jpg", "20251130_161308.jpg"],
-    "panorama_image": "長條圖1.jpg"
+    "stripImage": "長條圖1.jpg"
   },
   {
     "id": "wande-hospital",
@@ -437,7 +437,7 @@
     },
     "card_image": "20251130_141957.jpg",
     "gallery_images": ["20251130_141957.jpg", "20251130_142040.jpg", "20251130_142216.jpg"],
-    "panorama_image": "長條圖1.jpg"
+    "stripImage": "長條圖1.jpg"
   },
   {
     "id": "koka-kuka-coffee",
@@ -481,6 +481,6 @@
     },
     "card_image": "IMG_20251130_150217.jpg",
     "gallery_images": ["IMG_20251130_150217.jpg", "IMG_20251130_150300.jpg"],
-    "panorama_image": "panorama.jpg"
+    "stripImage": ""
   }
 ]

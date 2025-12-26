@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
             this.renderGallery();
-            this.renderPanorama();
+            this.renderStripImage();
             this.renderNearbyAttractions();
             this.renderDetailMap();
         }
@@ -302,43 +302,27 @@ document.addEventListener('DOMContentLoaded', () => {
             captionEl.textContent = `${this.currentLightboxIndex + 1} / ${this.galleryImages.length}`;
         }
 
-        renderPanorama() {
+        renderStripImage() {
             const attraction = this.currentAttraction;
-            const panoramaContainer = document.getElementById('panorama-container');
-            if (!panoramaContainer) return;
+            const section = document.getElementById('strip-image-section');
+            const container = document.getElementById('strip-image-container');
 
-            // Clear previous instance if it exists
-            // Pannellum viewer instance is attached to the DOM element directly
-            // No direct destroy method on the container, but recreating it works.
+            if (!section || !container) return;
 
-            if (attraction.panorama_image) {
-                panoramaContainer.style.display = 'block';
-                // Remove existing viewer to prevent duplicates and ensure clean re-render
-                const existingPanoramaDiv = document.getElementById('panorama');
-                if (existingPanoramaDiv) {
-                    existingPanoramaDiv.innerHTML = ''; // Clear content
-                } else {
-                    // Create if not exists, though it should from HTML
-                    const newPanoramaDiv = document.createElement('div');
-                    newPanoramaDiv.id = 'panorama';
-                    newPanoramaDiv.className = 'panorama-viewer';
-                    panoramaContainer.appendChild(newPanoramaDiv);
-                }
-
-                // Check if pannellum is defined globally, which it should be after CDN load
-                if (typeof pannellum === 'undefined') {
-                    console.error("Pannellum library not loaded.");
-                    return;
-                }
-
-                pannellum.viewer('panorama', {
-                    "type": "equirectangular",
-                    "panorama": `../images/${attraction.folder}/${attraction.panorama_image}`,
-                    "autoLoad": true,
-                    "autoRotate": -2
-                });
+            if (attraction.stripImage && attraction.stripImage.trim() !== '') {
+                section.style.display = 'block';
+                const imageUrl = `../images/${attraction.folder}/${attraction.stripImage}`;
+                
+                container.innerHTML = ''; // Clear previous image
+                
+                const img = document.createElement('img');
+                img.src = imageUrl;
+                img.alt = `${attraction.name[window.I18n.currentLang]} - ${window.I18n.t('strip_image_title')}`;
+                img.loading = 'lazy';
+                
+                container.appendChild(img);
             } else {
-                panoramaContainer.style.display = 'none';
+                section.style.display = 'none';
             }
         }
 
